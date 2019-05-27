@@ -1,0 +1,15 @@
+import gmpy2
+from Crypto.Util.number import long_to_bytes
+
+e = 65537
+N = 0xC2636AE5C3D8E43FFB97AB09028F1AAC6C0BF6CD3D70EBCA281BFFE97FBE30DD # 87924348264132406875276140514499937145050893665602592992418171647042491658461
+p = 275127860351348928173285174381581152299
+q = 319576316814478949870590164193048041239
+
+flag = open('flag.enc','r').read().encode('hex')
+phin = (p - 1) * (q - 1)
+
+d = gmpy2.invert(e,phin)
+flag = int(flag,16)
+m = pow(flag,d,N)
+print long_to_bytes(m)

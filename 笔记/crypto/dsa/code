@@ -1,0 +1,68 @@
+#!use/bin/python
+#coding=utf-8
+......
+from signature import signed
+from flag import FLAG
+from hashlib import sha512
+
+print("""
+                    _ _ _ _   _ _        _ _            _ _ _
+        | |  | |   |  _ _ _| |   |       |  |          / __  \\
+        | |__| |   | |       |   |       |  |         | /   \\ |
+        |      |   | |-----  |   |       |  |         | |   | |
+        |  __  |   | |-----  |   |       |  |         | |   | |
+        | |  | |   | |_ _ _  |   |_ _ _  |  - - - -|  |\\_ _/ |
+        | |  | |   |_ _ _ _| |_ _ _ _ _| |_ _ _ _ _|   \\_ _ /
+        """)
+
+def s2h(s):
+    return ''.join([hex(ord(c)).replace('0x', '') for c in s])
+
+def h2i(s):
+        #print(s)
+        #print(type(s))
+    return int(str(s),16)
+
+
+def nonce(msg, num):
+    n = 0
+    msg=h2i(msg)
+    num=h2i(num)
+    for i in str(msg):
+        i=int(i)**int(i)
+        d=int(str(int(i)*3141592653)[-6:])
+        n += num % d
+    n = (num-n) % d
+    return n
+
+
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+
+def sign(data):
+    data = s2h(data)
+    k = nonce(data,q)
+    kinv = modinv(k, q)
+    r = pow(g, k, p) % q
+    h = sha512(data).hexdigest()
+    h = int(h,16)
+    s = kinv * (h + r * priv) % q
+    return (r, s)
+
+
+def veryfy(data):
+    h = sha512(data).hexdigest()
+    h = int(h,16)
+    ......

