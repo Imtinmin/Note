@@ -1,0 +1,12 @@
+
+@media (max-width:768px){
+	h4{font-size: 30px;}
+    .glyphicon {font-size: 32px; }
+    .mescon{font-size: 30px; color: #666;line-height: 30px}
+    .btn{font-size: 24px;}
+}
+@media (min-width:769px){
+   h4{font-size: 18px;}
+   .glyphicon {font-size: 22px; }
+   .mescon{font-size: 18px; color: #666;line-height: 30px}
+}

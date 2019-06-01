@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:url(../images/lognbg.gif) repeat}
+.form_box th{ font-weight:500}
+.login_bg{ width:438px; height:360px; position:absolute; left:50%; top:40%; margin:-150px 0 0 -219px; background-color:#FFF; border:1px solid #CCC}
+.login_con{width:418px; padding:0 10px}
+.login_banner{height:72px; line-height:72px; width:100%; text-align:right; }
+.login_banner span{ font-size:24px; font-weight:600}
+.login_banner a{ text-decoration:none; color:#333}
+.reg_bg{ width:438px; height:475px; position:absolute; left:50%; top:40%; margin:-170px 0 0 -219px;background-color:#FFF; border:1px solid #CCC}
+.back_bg{ width:438px; height:245px; position:absolute; left:50%; top:40%; margin:-170px 0 0 -219px;background-color:#FFF; border:1px solid #CCC}

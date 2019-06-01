@@ -1,0 +1,45 @@
+ .sp-wrap {
+    display:none;
+    line-height:0;
+    font-size:0;
+	background-color: #F0F0F0;
+    position:relative;
+    margin:0 25px 15px 0;
+}
+.sp-large {
+    position:relative;
+    overflow:hidden;
+}
+.sp-large a img {
+    max-width:100%;
+    height:auto;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+}
+.sp-large a {
+    display:inline-block;
+}
+.sp-thumbs {
+    width:100%;
+    text-align:left;
+}
+.sp-thumbs img {
+    width:50px;
+    height:50px;
+}
+.sp-thumbs a:link, .sp-thumbs a:visited {
+    border:3px solid #eee;
+    display:inline-block;
+}
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current {
+    border:3px solid #5BC9B7!important;
+}
+.sp-zoom {
+    position:absolute;
+    left:0;
+    top:0;
+    cursor:zoom;
+    cursor: -webkit-zoom-out;
+    cursor: -moz-zoom-out;
+    display:none;
+}

@@ -1,0 +1,6 @@
+#
+# robots.txt for YXCMS
+#
+User-agent: * 
+Disallow: /data
+Disallow: /protected

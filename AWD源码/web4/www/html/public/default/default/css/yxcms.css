@@ -1,0 +1,41 @@
+@charset "utf-8";
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+/* CSS Document */
+.bg-darkblue{ background-color:#0e7ece}
+.bg-darkgreen{ background-color:#1ca762}
+.bg-darkmain{ background-color:#028f73}
+.bg-darkred{ background-color:#c82929}
+.bg-darkyellow{ background-color:#e35d04}
+.bg-darkblack{ background-color:#252525}
+.change{cursor:hand}
+.fixed-top {
+    box-shadow: 0 1px 9px #333;
+	-moz-box-shadow: 0 1px 9px #333;
+	-webkit-box-shadow: 0 1px 9px #333;
+	filter:alpha(opacity=90);
+	-moz-opacity:0.9;
+	-khtml-opacity: 0.9;
+	opacity: 0.9;
+    z-index: 1000;
+}
+.tab-nav .active a{ font-weight:600;}
+.link *{line-height:50px}
+.link a{ display:block; margin:5px; color:#FFF; float:left; }
+
+.listbanner{color:#fff;padding:40px 0;}
+.listbanner h1{margin-bottom:15px;font-size:28px;}
+.listbanner p{font-size:20px;}
+
+.rmenu li{ line-height:25px; line-height:25px; margin:2px 0}
+/*CSS page style*/
+DIV.pagelist { margin:10px 0;TEXT-ALIGN: center; clear:both; height:30px}
+DIV.pagelist a,DIV.pagelist SPAN{border:1px solid #CCC;height:30px; line-height:28px;TEXT-DECORATION: none; color: #757575;  display:block; float:left; padding:0 10px; margin-left:5px;}
+DIV.pagelist A:hover { BACKGROUND: #959595;  COLOR: #FFF;}
+DIV.pagelist A:on { BACKGROUND: #959595; COLOR: #FFF;}
+DIV.pagelist A:active { BACKGROUND:#959595;COLOR: #FFF;}
+DIV.pagelist SPAN.current {FONT-WEIGHT:bold;BACKGROUND: #959595;COLOR: #fff; }
+DIV.pagelist SPAN.disabled {}

