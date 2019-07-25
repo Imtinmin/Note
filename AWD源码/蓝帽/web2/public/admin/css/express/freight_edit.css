@@ -1,0 +1,281 @@
+@CHARSET "UTF-8";
+
+#select-region {
+	color: #666;
+	display: none;
+	background: #FFF;
+	position: fixed;
+	top: 0px;
+	border: 1px solid #000;
+	width: 690px;
+	z-index: 99;
+	overflow: visible;
+	background: #FFF;
+}
+
+#select-region .title {
+	padding: 10px;
+	overflow: hidden;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#select-region .title h2 {
+	display: inline-block;
+	color: #333333;
+	font-weight: normal;
+	line-height: normal;
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+}
+
+#select-region .title .cancle, #select-region .title .confirm {
+	float: right;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.mask-layer {
+	background: rgba(0, 0, 0, 0.7);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	display: none;
+	z-index: 99;
+}
+
+.clearfix:after {
+	clear: both;
+	content: "";
+	display: block;
+	height: 0;
+}
+
+.dcity {
+	display: block;
+	vertical-align: middle;
+	z-index: 1;
+}
+
+.gcity, .province-list {
+	display: inline-block;
+}
+
+.ecity {
+	float: left;
+	height: 30px;
+	margin-right: 1px;
+	padding-right: 8px;
+	position: relative;
+}
+
+.dialog-areas li span.group-label {
+	display: inline-block;
+	margin-right: 5px;
+	padding: 5px 0 5px 10px;
+	width: 70px;
+}
+
+.drop-down {
+	cursor: pointer;
+	height: 8px;
+	padding: 2px;
+	width: 8px;
+}
+
+.citys {
+	background-color: #FFFEC6;
+	border: 1px solid #F7E4A5;
+	display: none;
+	float: right;
+	left: 0;
+	position: absolute;
+	top: 23px;
+	width: 214px;
+	z-index: 20000;
+}
+
+.province-list {
+	width: 500px;
+}
+
+.gcity, .province-list {
+	display: inline-block;
+}
+
+.areas input {
+	float: left;
+	margin: 3px 3px 0;
+}
+
+.areas label {
+	float: left;
+	margin: 0px;
+	font-weight: normal;
+}
+
+.gareas input {
+	float: left;
+	margin: 3px;
+}
+
+.gareas label {
+	float: left;
+	margin: 0px;
+	font-weight: normal;
+	color: #333333;
+}
+
+.group-label label.disabled, .areas label.disabled, .gareas label.disabled
+	{
+	color: #9E9E9E;
+	cursor: not-allowed;
+}
+
+.group-label input {
+	float: left;
+	margin: 3px 8px 3px 0px;
+}
+
+.group-label label {
+	font-weight: normal;
+	color: #333333;
+}
+
+.dialog-areas span.gareas {
+	border: 1px solid #FFFFFF;
+	display: inline-block;
+	height: 17px;
+	margin-right: 3px;
+	padding: 4px 2px 1px;
+	position: relative;
+	white-space: nowrap;
+}
+
+.dialog-areas li span.areas {
+	display: inline-block;
+	margin-right: 3px;
+	padding: 0px 0px 0px 4px;
+}
+
+.area-group {
+	display: block;
+	padding-right: 3em;
+	font-size: 12px;
+}
+
+.table-div {
+	margin-top: 0px;
+	/* 	padding-right: 20px; */
+	background-color: #fff;
+	font-size: 12px;
+}
+
+.table-div>table {
+	width: 100%;
+	padding-left: 20px;
+}
+
+.table-div>table tr td {
+	border: 1px solid #e6e6e6;
+	padding: 10px;
+}
+
+.table-div .bg-f5f5f5 {
+	background-color: #F5F5F5;
+}
+
+.table-title-font {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.table-first-td {
+	width: 12%;
+	text-align: right;
+}
+
+label {
+	font-weight: normal;
+	margin: 0;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.dialog-areas {
+	position: inherit;
+	margin: 0;
+	border: 0;
+}
+
+.btn-gradient-default, .btn-gradient-default:link {
+	display: inline-block;
+	padding: 4px 15px;
+	border: 1px solid #9E9E9E;
+	border-radius: 3px;
+	color: #fff;
+	background: #9E9E9E;
+}
+
+.btn-gradient-default:hover {
+	color: #fff;
+	text-decoration: none;
+	background: #9E9E9E;
+	cursor: not-allowed;
+}
+
+.btn-gradient-blue, .btn-gradient-blue:link {
+	display: inline-block;
+	padding: 4px 15px;
+	border: 1px solid #377ced;
+	border-radius: 3px;
+	color: #fff;
+	background: #4a8bf6;
+}
+
+.btn-gradient-blue:hover {
+	color: #fff;
+	text-decoration: none;
+	background: #286EE0;
+}
+
+.star {
+	color: red;
+	padding-right: 5px;
+	vertical-align: middle;
+}
+
+.region-info {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.Switch_FlatCircular.On .SwitchLine:after, .Switch_FlatCircular .SwitchLine:before
+	{
+	top: 0;
+}
+
+.input-info-table {
+	border: 1px solid #E3E3E3;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.input-info-table input {
+	width: 100px;
+	margin: 0;
+	vertical-align: middle;
+}
+
+#shipping_fee_name {
+	width: 220px;
+	margin: 0px;
+}
+
+.freight-template-footer {
+	margin-bottom: 10px;
+	margin-top: 30px;
+	text-align: center;
+}

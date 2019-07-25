@@ -1,0 +1,422 @@
+{extend name="wap/default/base" /} {block name="resources"/}
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/common-v4.4.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/person-v4.4.css">
+<!-- <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/weui.css" /> -->
+<style>
+#form1{margin:0;}
+#form1 .row{margin:0px;border-bottom: 1px solid #f1f1f1;background-color:#fff;}
+/* .columns{height:40px;line-height:40px;} */
+.columns label{width:24%;float:left;font-size:12px;text-align:center;margin-bottom: 0px;}
+.columns .columns-select{width:72%;float:right;font-size:12px;position: relative;}
+.columns-select:after{content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -3px;}
+.columns .columns-input{
+	width:72%;float:right;font-size:12px;
+}
+.columns .columns-input input{
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    color: inherit;
+    height: 1.41176471em;
+    line-height: 1.41176471;}
+.columns select{padding-right: 30px;    -webkit-appearance: none;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+/*     width: 100%; */
+    font-size: inherit;
+    height: 40px;
+    position: relative;
+    z-index: 1;}
+textarea{    border: none;
+    font-size: 14px;
+    width: 100%;
+    height: 60px;
+    resize: none;
+    outline: none;}
+a.button{display:block;width:80%;margin:0 auto 0;text-align:center;background-color:#ff6600;border-radius:5px;border:1px solid #ff6600;color:#fff;font-size:16px;height:40px;line-height:40px;}
+.row{
+	margin-bottom:10px;
+}
+</style>
+{/block}
+
+
+{block name="goodsHead"}
+<section class="head">
+	<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
+	<div class="head-title">申请退款</div>
+</section>
+{/block}
+{block name="main" }
+<div data-alert class="alert-box alert" style="display: none;"
+	id="errerMsg">
+	<a href="#" class="close">&times;</a>
+</div>
+
+
+
+
+<form class="main mt-45">
+	<div class="return-process">
+		<ul class="clear">
+			<li class="step01">
+				<p class="name">买家申请退款</p> <span class="number">1</span> <span
+				class="prcess-line prcess-line-r"></span>
+			</li>
+			<li class="step02">
+				<p class="name">商家处理退款申请</p> <span class="prcess-line prcess-line-l"></span>
+				<span class="number">2</span> <span
+				class="prcess-line prcess-line-r"></span>
+			</li>
+			<li class="step03">
+				<p class="name">退款完成</p> <span class="prcess-line prcess-line-l"></span>
+				<span class="number">3</span>
+			</li>
+		</ul>
+	</div>
+	{if condition="$detail.refund_status eq 0"}
+	<div class="form-c" id="form1">
+		<div class="row">
+			<div class="small-12 columns">
+				<label><span class="color-red">*</span>处理方式：</label> 
+				<div class="columns-select">
+				<select
+					id="refund_require">
+					<option value="1" selected="selected">我要退款，但不退货</option>
+					{neq name="detail['shipping_status']" value="0"}
+					<option value="2">我要退款，并且退货</option>
+					{/neq}
+				</select></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<label><span class="color-red">*</span>退款原因：</label> 
+				<div class="columns-select">
+				<select id="refund_reason">
+					<option value="买/卖双方协商一致">买/卖双方协商一致</option>
+					<option value="买错/多买/不想要">买错/多买/不想要</option>
+					<option value="商品质量问题">商品质量问题</option>
+					<option value="未收到货品">未收到货品</option>
+					<option value="其他">其他</option>
+				</select></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<label><span class="color-red">*</span>退款金额：</label>
+				<div class="columns-input">
+					<input value="" id="refund_money" class="maxRefund" type="text"
+						placeholder="最多可退款{$refund_money}元" onblur="maxRefund()">
+					<input value="{$refund_money}" id="maxRefundMoney" type="hidden" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns" style="background-color:#f5f5f5;">
+				<label>退款说明：</label>
+			</div>
+		</div>
+		<textarea rows="5" id="description" style="padding:5px 15px;"></textarea>
+		<a class="button" href="javascript:void(0)" onclick="btnSave()">提交退款申请</a>
+	</div>
+	{elseif condition="$detail.refund_status eq -3" /}
+	<div class="form-c" id="form1">
+		<div class="row">
+			<div class="small-12 columns">
+				<label style="margin-top: 12px;"><span class="color-red">*</span>处理方式：</label> 
+				<select id="refund_require">
+					{if condition="$detail.refund_type eq 1"}
+						<option value="1" selected="selected">我要退款，但不退货</option>
+						{else}<option value="1">我要退款，但不退货</option>
+					{/if}
+					{neq name="$detail.shipping_status" value="3"} 
+						{if condition="$detail.refund_type eq 2"}
+						<option value="2" selected="selected">我要退款，并且退货</option>
+						{else }<option value="2">我要退款，并且退货</option>
+						{/if} 
+					{/neq}
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<label style="margin-top: 12px;"><span class="color-red">*</span>退款原因：</label>
+				<select id="refund_reason">
+					{if condition="$detail.refund_reason eq '买/卖双方协商一致'"}
+						<option value="买/卖双方协商一致" selected="selected">买/卖双方协商一致</option>
+						{else}<option value="买/卖双方协商一致">买/卖双方协商一致</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '买错/多买/不想要'"}
+						<option value="买错/多买/不想要" selected="selected">买错/多买/不想要</option>
+						{else}<option value="买错/多买/不想要">买错/多买/不想要</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '商品质量问题'"}
+						<option value="商品质量问题" selected="selected">商品质量问题</option>
+						{else}<option value="商品质量问题">商品质量问题</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '未收到货品'"}
+						<option value="未收到货品" selected="selected">未收到货品</option>
+						{else}<option value="未收到货品">未收到货品</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '其他'"}
+						<option value="其他" selected="selected">其他</option>
+						{else}<option value="其他">其他</option>
+					{/if}
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<label style="margin-top: 12px;"><span class="color-red">*</span>退款金额：</label>
+				<div style="height:40px;line-height:40px;"> 
+					<input value="{$refund_money}" id="refund_money" class="maxRefund" type="text"
+						placeholder="最多可退款{$refund_money}元"> <input
+						value="{$refund_money}" id="maxRefundMoney" type="hidden" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<label style="margin-top: 12px;">退款说明：</label>
+				<textarea rows="5" id="description"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns">
+				<a class="button" href="javascript:void(0)" onclick="btnSave()">提交退款申请</a>
+			</div>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq 1" /}
+	<div class="none-goods">
+		<i class="icon-tip-circle"></i>
+		<div class="text">
+			<h4>等待商家处理退款申请</h4>
+			<ul>
+				<li>如果商家同意，退款申请将达成并退款至您的支付宝账号或银行卡中。</li>
+			</ul>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq 2" /}
+	<!--已收到货 begin-->
+	<div class="seller-agree" id="form2">
+		<h4>请退货并填写物流信息</h4>
+		<h5>1、请退货</h5>
+		<p class="explanation">
+			未经卖家同意，请不要使用到付或平邮。<br /> 
+			退货地址： 
+			<span class="address">
+				{if condition="$shop_info.shop_address neq ''"}
+						{$shop_info.shop_address}&nbsp;&nbsp;{$shop_info.seller_name}&nbsp;&nbsp;{$shop_info.seller_mobile}&nbsp;&nbsp;{$shop_info.seller_zipcode}
+				{else /}
+						该商家暂未配置收货地址
+				{/if}	
+			</span>
+		</p>
+		<h5>
+			2、请填写退货物流信息 <small>（逾期未填写，退货申请将关闭）</small>
+		</h5>
+		<div class="express-form">
+			<div class="row">
+				<label><span class="color-red">*</span>物流公司：</label> <input
+					type="text" id="LogisticsCompany" />
+			</div>
+			<div class="row">
+				<label><span class="color-red">*</span>运单号码：</label> <input
+					type="text" id="ExpressNo" />
+			</div>
+			<div class="row">
+				<a class="button" href="javascript:void(0)" onclick="ExpressSave()">提交</a>
+			</div>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq 3" /}
+	<div class="none-goods">
+		<i class="icon-tip-circle"></i>
+		<div class="text">
+			<h4>等待商家收货</h4>
+			<ul>
+				<li>如果商家同意，退款申请将达成并退款至您的支付宝账号或银行卡中。</li>
+			</ul>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq 4" /}
+	<!--等待卖家同意退款 begin-->
+	<div class="wait-seller-agree">
+		<i class="icon-tip-circle"></i>
+		<div class="text" style="padding: 20px 0 1px 5px;">
+			<h4>您已成功申请退款，等待卖家处理退款申请。</h4>
+		</div>
+	</div>
+	<!--等待卖家同意退款 begin-->
+	{elseif condition="$detail.refund_status eq 5" /}
+	<!--step03 begin-->
+	<div class="return-success">
+		<i class="icon-right-circle"></i>
+		<div class="text">
+			<h4>退款成功</h4>
+			<p class="time">退款成功时间:{$detail.refund_time | getTimeStampTurnTime}</p>
+			<p class="money">退款金额： {$detail.refund_real_money}元</p>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq -1" /}
+	<!--卖家拒绝 begin-->
+	<div class="disagree-return">
+		<i class="icon-tip-circle"></i>
+		<div class="text" style="padding: 20px 0 1px 5px;">
+			<h4>卖家拒绝您的退款申请</h4>
+			<div class="operate"></div>
+		</div>
+	</div>
+	{elseif condition="$detail.refund_status eq -2" /}
+	<div class="return-success">
+		<i class="icon-tip-circle"></i>
+		<div class="text" style="padding: 20px 0 1px 5px;">
+			<h4>退款已关闭</h4>
+		</div>
+	</div>
+	{/if}
+</form>
+<script>
+        var orderId = {$detail.order_id};
+        var itemId ={$detail.order_goods_id};
+        $(function() {
+			var refund_status = {$detail.refund_status};
+            if(refund_status == ""){
+				$(".step01").addClass("current");
+            }else if(refund_status == 0){
+            	$(".step01").addClass("current");
+            }else if(refund_status == 5){
+				$(".step01").addClass("current");
+	            $(".step02").addClass("current");
+	            $(".step03").addClass("current");
+            }else if(refund_status < 0){
+            	$(".step01").addClass("current");
+	            $(".step02").addClass("current");
+            }else{
+				$(".step01").addClass("current");
+	            $(".step02").addClass("current");
+            }
+        });
+        function ExpressSave(){
+            var LogisticsCompany=$("#LogisticsCompany").val();
+            var ExpressNo=$("#ExpressNo").val();
+            if(LogisticsCompany==""){
+                $("#LogisticsCompany").focus();
+            }else if(ExpressNo==""){
+                $("#ExpressNo").focus();
+            }else{
+                $.ajax({
+                    url: "{:__URL('APP_MAIN/order/ordergoodsrefundexpress')}",
+                    type: "post",              
+                    async: false,
+                    data: { "order_id": orderId, "order_goods_id": itemId, "refund_express_company": LogisticsCompany, "refund_shipping_no": ExpressNo},
+                    dataType: "json",
+                    success: function (response) {
+                    	if(response.code>0){
+                    		showBox('申请退款成功');
+                    		window.location.href = __URL("APP_MAIN/Member/index");
+                     	}else{
+                     		showBox('申请退款失败');
+                     	}
+                    }
+                });
+             }
+        }
+        function btnSave() {
+            var refund_require = $("#refund_require").val();
+            var refund_reason = $("#refund_reason").val();
+            var refund_money = $("#refund_money").val();//退款金额
+            var description = $("#description").val();//
+//            var OrderAmount = 0.01;//订单总价
+//             var OrderRefundCount = $("#reCount").html();//退货数量
+            var num2 = parseFloat($("#maxRefundMoney").val());
+            if(refund_money >= 0){
+	            if (refund_money <0 || refund_money >num2 ) {
+	            	$("#refund_money").focus();
+	            	showBox("超出可退款金额范围");
+	            	return;
+	            }
+            }else{
+            	$("#refund_money").focus();
+            	showBox("请输入退款金额");
+            	return;
+            }
+            //alert(orderId+","+itemId+","+refund_require+","+refund_money+","+refund_reason);
+            //return;
+            $.ajax({
+                url: "{:__URL('APP_MAIN/order/ordergoodsrefundaskfor')}",
+                type: "post",              
+                async: false,
+                data: {
+                	"order_id": orderId, 
+                	"order_goods_id": itemId, 
+                	"refund_type": refund_require, 
+                	"refund_require_money":refund_money,
+                	"refund_reason": refund_reason,
+                },
+                //$order_id, $order_goods_id, $refund_type, $refund_require_money, $refund_reason
+                dataType:"json",
+                success: function (response) {
+                 	if(response.code>0)
+                 	{
+                 		window.location.reload();
+                 	}else{
+                 		showBox(response.message);
+                 	}
+                    /*if(response.retval == 1){
+                    	
+                    }else{
+                        alert("提交失败、请稍后重试");
+                    }*/
+                }
+            })
+        }
+    /*function backPage(){
+   		window.location.href="{$Think.config.HEIMA_MODULE}/Orders/myOrderList";
+   	}*/
+    	//最多退款金额
+        function maxRefund() {
+//             alert(58);
+            var num = parseFloat($("#refund_money").val());
+//             alert(num);
+            var num2 = parseFloat($("#maxRefundMoney").val());
+//             alert(num2);
+            if (num < 0 || num >num2 ) {
+            	$("#refund_money").focus();
+            	showBox("超出可退款金额范围");
+            	return;
+            }
+        };
+    /*    function onBridgeReady(){
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        }else{
+            onBridgeReady();
+        }*/
+    </script>
+{/block}

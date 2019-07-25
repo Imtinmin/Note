@@ -1,0 +1,21 @@
+{extend name="shop/blue/base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/ns_help.css">
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/ns_article_help.js"></script>
+{/block}
+{block name="main"}
+<div class="content w990 clearfix">
+	{include file='shop/blue/Cms/controlLeftMenu'/}
+	<!-- 右半部分内容 -->
+	<div class="fr" id="question">
+		<div class="right-inner">
+			<h3 class="help-tit">{$info['title']}</h3>
+			<div class="help-detail">
+				<p style="color: #666666;">{$info['content']}</p>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+{block name="javascript"}{/block}

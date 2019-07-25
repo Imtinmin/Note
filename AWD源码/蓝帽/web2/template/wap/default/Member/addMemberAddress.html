@@ -1,0 +1,46 @@
+{extend name="wap/default/base" /} 
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/member_address.css">
+{/block}
+{block name="goodsHead"}
+<section class="head">
+	<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
+	<div class="head-title">添加收货地址</div>
+</section>
+{/block}
+{block name="main"}
+<input type="hidden" id="ref_url" value="{$pre_url}">
+<input type="hidden" value="{$flag}" id="hidden_flag" />
+<form class="form-info">
+	<div class="div-item">
+		<span>姓名</span> <input type="text" placeholder="请输入收件人姓名" id="Name" />
+	</div>
+	<div class="div-item">
+		<span>手机</span> <input type="text" placeholder="请输入手机号" id="Moblie" />
+	</div>
+	<div class="div-item">
+		<span>省份</span> <select id="seleAreaNext" onchange="GetProvince();getSelCity();">
+			<option value="-1">请选择省</option>
+		</select>
+	</div>
+	<div class="div-item">
+		<span>城市</span> <select id="seleAreaThird" onchange="getSelCity();">
+			<option value="-1">请选择市</option>
+		</select>
+	</div>
+	<div class="div-item">
+		<span>区县</span> <select id="seleAreaFouth">
+			<option value="-1">请选择区/县</option>
+		</select>
+	</div>
+	<div class="div-item">
+		<span>详细地址</span> <input type="text" placeholder="请输入详细地址"
+			id="AddressInfo" />
+	</div>
+</form>
+<button onclick="saveAddress()" class="btn-save">保存</button>
+{/block}
+{block name="bottom"}{/block} 
+{block name="javascript"}
+<script src="__TEMP__/{$style}/public/js/address.js"></script>
+{/block}

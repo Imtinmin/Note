@@ -1,0 +1,119 @@
+{extend name="shop/blue/base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/reviewCommodity.css">
+<script src="__STATIC__/js/ajax_file_upload.js" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="margin-w1210">
+	{include file='shop/blue/Member/controlLeftMenu'/}
+	<div class="member-main">
+		
+		<div class="box">
+			<div class="tabmenu">
+				<ul class="tab">
+					<li class="active">对商品进行追加评价</li>
+				</ul>
+			</div>
+			<a href="javascript:history.go(-1);" style="position: absolute;right: 10px;top: 20px;">返&nbsp;回</a>
+			<div class="evaluate_main">
+				<form id="evalform" method="post" action="SHOP_MAIN/member/moditycommodity">
+					<input type="hidden" name="form_submit" value="ok" />
+					<div class="evaluate_block">
+						<h4>操作提示：</h4>
+						<ul>
+							<li style="margin-bottom: 6px; float:none;">评价信息最多填写150字，请您根据本次交易，给予真实、客观地评价；您的评价将是其他会员的参考。</li>
+							<li style="margin-bottom: 6px; float:none;">店铺动态评分默认为“5分”，您可以根据本次交易情况给予商家评分，<span class="orange"> 一旦提交后不能修改。</span></li>
+						</ul>
+					</div>
+					<div class="tabmenu2">
+						<ul class="tab" style="border-bottom: solid 1px #E7E7E7;">
+							<li class="active" style="float:none"><a href="javascript:void(0);" style="font-size:16px; font-weight: 600; text-decoration: none; color: #0689e1; padding: 7px 19px 9px 19px;border-bottom: solid 2px #0689e1; cursor: default;">对购买过的商品评价</a></li>
+						</ul>
+					</div>
+					<input type="hidden" id="order_id" value="{$order_id}" />
+					<input type="hidden" id="order_no" value="{$order_no}" />
+					{foreach $list as $vo}
+					<div class="evaluate" ogid="{$vo.order_goods_id}" oid="{$vo.order_id}">
+						<div class="evaluate_left">
+							<div class="evaluate_left_top">
+								<img src="__UPLOAD__/{$vo.picture_info.pic_cover_small}" />
+							</div>
+							<div class="evaluate_left_bottom">
+								<div class="evaluate_left_bottom_main">
+									<a href="javascript:void(0);">{$vo.goods_name}</a>
+								</div>
+							</div>
+						</div>
+						<div class="evaluate_right">
+						<!-- <div class="item-rate-act">
+								<ul>
+									<li class="good">
+										<label for="rate_good{$vo.order_goods_id}">
+											<input type="radio" class="good-rate" id="rate_good{$vo.order_goods_id}" name="rate{$vo.order_goods_id}" value="1">
+											<i class="tb-rate-ico ico-good" title="好评"></i>
+										</label>
+									</li>
+									<li class="normal">
+										<label for="rate_normal{$vo.order_goods_id}">
+											<input type="radio" class="normal-rate" id="rate_normal{$vo.order_goods_id}" name="rate{$vo.order_goods_id}" value="2">
+											<i class="tb-rate-ico ico-neutral" title="中评"></i>
+										</label>
+									</li>
+									<li class="bad">
+										<label for="rate_bad{$vo.order_goods_id}">
+											<input type="radio" class="bad-rate" id="rate_bad{$vo.order_goods_id}" name="rate{$vo.order_goods_id}" value="3">
+											<i class="tb-rate-ico ico-bad" title="差评"></i>
+										</label>
+									</li>
+								</ul>
+							</div> -->
+							<div>
+								<div class="evaluate_right_one star">商品评分：
+									<a href="javascript:void(0)" val="1" sel="red"><img src="__TEMP__/{$style}/public/images/star_red.png"/></a>
+									<a href="javascript:void(0)" val="2" sel="red"><img src="__TEMP__/{$style}/public/images/star_red.png"/></a>
+									<a href="javascript:void(0)" val="3" sel="red"><img src="__TEMP__/{$style}/public/images/star_red.png"/></a>
+									<a href="javascript:void(0)" val="4" sel="red"><img src="__TEMP__/{$style}/public/images/star_red.png"/></a>
+									<a href="javascript:void(0)" val="5" sel="red"><img src="__TEMP__/{$style}/public/images/star_red.png"/></a>
+								</div>
+							</div>
+							<div class="rate_content">
+								<textarea cols="60" rows="4" placeholder="请输入要评价的内容，不要超过150个字符。" style="resize: none;"></textarea>
+								<span class="evaluate_right_two"> 
+									<input type='file' class="input-file" name='imgPhoto' id="img_{$vo.order_goods_id}" onchange='UploadImage(this);' />
+								</span>
+								<span class="evaluate_right_three"><i></i>买家晒图</span>
+								<span class="evaluate_right_imgs"></span>
+								<span class="evaluate_right_four">0/5</span>
+								<span class="evaluate_right_isni"><label> <input type="checkbox" id="checkbox{$vo.order_goods_id}" class="checkbox vm">&nbsp;匿名评价</label></span>
+							</div>
+						</div>
+					</div>
+					{/foreach}
+					<div class="evaluate_form">
+						<div class="evaluate_bottom">
+							<input id="btn_submit" type="button" class="common-btn" onclick="doSubmit(1)" value="提交"/>
+						</div>
+					</div>
+				</form>
+				<input type="hidden" id="isSub" value="true" />
+			</div>
+		</div>
+		<input type="hidden" id="style" name="style" value="{$style}" />
+	</div>
+</div>
+{/block}
+{block name="RightSideBar"}{/block}
+{block name="javascript"}
+<!-- 添加js文件 -->
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/review.js"></script>
+<script>
+$(function(){
+	
+	$("li[data-href^='{:__URL('SHOP_MAIN/member/orderlist')}'").addClass('current');
+	$(".js-bread-crumb").attr("href",'{:__URL('SHOP_MAIN/member/orderlist')}');
+	$(".js-bread-crumb").text("我的订单");
+	$(".js-bread-crumb").parent().append('<span class="crumbs-arrow">&gt;</span><a href="{:__URL('SHOP_MAIN/member/reviewCommodity','orderid='.$order_id)}">商品评价</a>');
+});
+</script>
+{/block}
+{/extend}

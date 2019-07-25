@@ -1,0 +1,297 @@
+{extend name="shop/blue/base" /}
+{block name="resources"}
+<!-- 添加css、字体文件文件 -->
+{/block}
+{block name="main"}
+
+<div class="margin-w1210">
+	{include file='shop/blue/Member/controlLeftMenu'/}
+	<article class="member-main">
+		<!-- 快捷方式 -->
+		<div class="shortcuts">
+			<!-- 关注中 -->
+			<article class="item focus-on">
+				<h4>关注中</h4>
+				<ul>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/goodscollectionlist')}'">
+						<i class="icon i-goods"></i>
+						<span>商品</span>
+					</li>
+					<li>
+						<i class="icon i-footprint"></i>
+						<span>足迹</span>
+					</li>
+				</ul>
+			</article>
+			
+			<!-- 交易进行 -->
+			<article class="item trading">
+				<h4>交易进行</h4>
+				<ul>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=0')}'">
+						<i class="icon i-obligation"></i>
+						<span>待付款</span>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=1')}'">
+						<i class="icon i-send-the-goods"></i>
+						<span>待发货</span>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=2')}'">
+						<i class="icon i-for-the-goods"></i>
+						<span>待收货</span>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=5')}'">
+						<i class="icon i-evaluate"></i>
+						<span>待评价</span>
+					</li>
+				</ul>
+			</article>
+			
+			<!-- 售后服务 -->
+			<article class="item after-sales-service">
+				<h4>售后服务</h4>
+				<ul>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/backlist')}'">
+						<i class="icon i-refund"></i>
+						<span>退款</span>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/backlist')}'">
+						<i class="icon i-return-the-goods"></i>
+						<span>退货</span>
+					</li>
+				</ul>
+			</article>
+			
+		</div>
+		
+		<!-- 用户公告 -->
+		<div class="user-notice">
+			<h4>用户中心公告</h4>
+			<!--<marquee direction="left" align="left" behavior="scroll" scrollamount="1" scrolldelay="0" loop="-1">{$user_notice}</marquee> -->
+			<p>{$user_notice}</p>
+		</div>
+		
+		<div class="block">
+			<!-- 余额、积分、优惠券(资产) -->
+			<div class="assets">
+				<ul>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/balancelist')}'" title="查看余额" data-flag="i-balance">
+						<header>
+							<i class="icon i-balance"></i>
+							<span>余额</span>
+						</header>
+						<strong>{$balance}元</strong>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/integrallist')}'" title="查看积分" data-flag="i-integral">
+						<header>
+							<i class="icon i-integral"></i>
+							<span>积分</span>
+						</header>
+						<strong>{$point}积分</strong>
+					</li>
+					<li onclick="location.href='{:__URL('SHOP_MAIN/member/vouchers')}'" title="查看优惠券" data-flag="i-coupons">
+						<header>
+							<i class="icon i-coupons"></i>
+							<span>优惠券</span>
+						</header>
+						<strong>{$vouchersCount}张</strong>
+					</li>
+				</ul>
+			</div>
+			<!-- 安全等级 -->
+			<div class="security">
+				<div class="security-level">
+					<h4>安全等级</h4>
+					
+					{if condition="$member_info['user_info']['user_tel'] neq '' and $member_info['user_info']['user_email'] neq ''"}
+					<span>安全</span>
+					<i class="icon i-security-level"><em class="security" data-level="0"></em></i>
+					{elseif condition="$member_info['user_info']['user_tel'] neq '' OR $member_info['user_info']['user_email'] neq ''"/}
+					<span>良好</span>
+					<i class="icon i-security-level"><em class="good" data-level="75"></em></i>
+					{else/}
+					<span>一般</span>
+					<i class="icon i-security-level"><em class="general" data-level="100"></em></i>
+					{/if}
+					<a href="{:__URL('SHOP_MAIN/member/usersecurity')}" title="提升账户安全等级">提升 &gt;</a>
+				</div>
+				<div class="info">
+					{if condition="$member_info['user_info']['user_tel'] neq ''"}
+					<label>手机</label>
+					<span>{$member_info['user_info']['user_tel']}</span>
+					<a href="{:__URL('SHOP_MAIN/member/usersecurity?atc=user_mobile')}">解除绑定</a>
+					{else/}
+					<label style="margin-right:10px;">手机</label>
+					<a href="{:__URL('SHOP_MAIN/member/usersecurity?atc=user_mobile')}">未绑定</a>
+					{/if}
+				</div>
+				<div class="info">
+					{if condition="$member_info['user_info']['user_email'] neq ''"}
+					<label>邮箱</label>
+					<span>{$member_info['user_info']['user_email']}</span>
+					<a href="{:__URL('SHOP_MAIN/member/usersecurity?atc=user_email')}">解除绑定</a>
+					{else/}
+					<label style="margin-right:10px;">邮箱</label>
+					<a href="{:__URL('SHOP_MAIN/member/usersecurity?atc=user_email')}">未绑定</a>
+					{/if}
+				</div>
+			</div>
+		</div>
+		
+		<div class="block">
+			<!-- 交易提醒 -->
+			<div class="trading-to-remind">
+			
+				<h4>交易提醒<span onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist')}';">查看全部订单<i class="icon i-arrow"></i></span></h4>
+				<header>
+					<ul>
+						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=0')}';">待付款<span>({$wait_pay_num})</span></li>
+						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=5')}';">待评价<span>({$wait_evaluate})</span></li>
+					</ul>
+				</header>
+				<article class="order-list">
+					{if condition="count($orderList) neq 0"}
+					<table>
+						<colgroup>
+							<col width="15%">
+							<col width="40%">
+							<col width="30%">
+							<col width="10%">
+						</colgroup>
+						
+						{foreach $orderList as $order}
+						<tr>
+							<td>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$order['order_item_list'][0]['goods_id'])}" class="img">
+									<img src="__UPLOAD__/{$order.order_item_list.0.picture.pic_cover_small}"/>
+									<span class="order-num">{$order.order_item_list.0.num}</span>
+								</a>
+							</td>
+							<td>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$order['order_item_list'][0]['goods_id'])}" title="{$order.order_item_list.0.goods_name}" target="_blank">{$order.order_item_list.0.goods_name}</a>
+							</td>
+							<td>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$order['order_item_list'][0]['goods_id'])}" title="{$order.order_item_list.0.goods_name}" target="_blank">{$order.order_item_list.0.sku_name}</a>
+							</td>
+							<td>
+								<a class="cancel-order" href="javascript:;" onclick="cancel_order({$order.order_id})">取消订单</a>
+							</td>
+							<td>
+								<a href="{:__URL('SHOP_MAIN/member/orderdetail','orderid='.$order['order_id'])}" title="查看订单" target="_blank">查看</a>
+							</td>
+						</tr>
+						{/foreach}
+					</table>
+					{else/}
+					<div class="no-order-data">
+						<i class="icon i-order"></i>
+						<p>您好久没在商城购物了，赶快<span onclick="location.href='{:__URL('SHOP_MAIN')}';">去看看</span>吧！</p>
+					</div>
+					{/if}
+				</article>
+			</div>
+			<!-- 我的购物车 -->
+			<div class="my-shopping-cart">
+				<h4>我的购物车</h4>
+				<hr class="divider"/>
+				{if condition="count($cart_list) neq 0"}
+				<div class="list">
+					<ul>
+						{foreach name="cart_list" item = "cart"}
+						<li>
+							<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$cart['goods_id'])}" target="_blank" title="{$cart.goods_name}" class="pic">
+								{if condition="$cart['picture_info'] !=''"}
+								<img src="__UPLOAD__/{$cart['picture_info']['pic_cover_small']}" alt="{$cart.goods_name}" />
+								{else/}
+								<img src="__TEMP__/{$style}/public/images/goods/default_goods_img.png" alt="{$cart.goods_name}" />
+								{/if}
+							</a>
+							<div class="item">
+							<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$cart['goods_id'])}" target="_blank" title="{$cart.goods_name}" class="name">{$cart.goods_name}</a>
+							<p>售价：<strong>￥{$cart.price}</strong></p>
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+					<p style="text-align: center;font-size: 12px;margin: 10px 0;padding-bottom: 5px;">
+						<a href="{:__URL('SHOP_MAIN/goods/cart')}" target="_blank" title="查看购物车所有商品">查看购物车所有商品<i class="icon i-arrow"></i></a>
+					</p>
+				</div>
+				{else/}
+				<div class="no-cart-data">
+					<i class="icon i-shipping-cart"></i>
+					<p>您的购物车中还没有商品<br/>赶快<span onclick="location.href='{:__URL('SHOP_MAIN')}';">去看看</span>吧！</p>
+				</div>
+				{/if}
+				
+			</div>
+		</div>
+		<!-- 商品收藏 -->
+		<div class="goods-collection">
+			<h4>商品收藏<span onclick="location.href='{:__URL('SHOP_MAIN/member/goodscollectionlist')}';">查看收藏的所有商品<i class="icon i-arrow"></i></span></h4>
+			<hr class="divider"/>
+			{if condition="$goods_collection_list_count>0"}
+			<div class="list">
+				<ul>
+					{foreach name="goods_collection_list" item="goods" key="k"}
+					<li>
+						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank" class="img">
+							{if condition="$goods.pic_cover_mid !=''"}
+							<img src="__UPLOAD__/{$goods.pic_cover_mid}" alt="{$goods.goods_name}" />
+							{else/}
+							<img src="__TEMP__/{$style}/public/images/goods/default_goods_img.png" alt="{$goods.goods_name}" />
+							{/if}
+							<strong>￥{$goods.promotion_price}</strong>
+						</a>
+						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank" class="name">{$goods.goods_name}</a>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+			{else/}
+			<div class="no-collection-data">
+				<i class="icon i-collection"></i>
+				<p>您还没有收藏任何商品，赶快<span onclick="location.href='{:__URL('SHOP_MAIN')}';">去看看</span>吧！</p>
+			</div>
+			{/if}
+		</div>
+	</article>
+</div>
+{/block}
+
+{block name="RightSideBar"}{/block}
+{block name="javascript"}
+<script type="text/javascript">
+$(function(){
+	//给安全等级添加动画效果
+	$(".security-level em").animate({ width : $(".security-level em").attr("data-level") },1200);
+	$(".assets li").hover(function(){
+		var flag = $(this).attr("data-flag");
+		$(this).find("i").removeClass(flag).addClass(flag+"-hover");
+		$(this).find("span").css("color","#0689e1");
+		$(this).find("strong").css("color","#0689e1");
+	},function(){
+		var flag = $(this).attr("data-flag");
+		$(this).find("i").removeClass(flag+"-hover").addClass(flag);
+		$(this).find("span").css("color","#333333");
+		$(this).find("strong").css("color","#333333");
+	});
+});
+function cancel_order(order_id){
+	$.ajax({
+		url:"{:__URL('SHOP_MAIN/member/orderclose')}",
+		type:'post',
+		data:{'order_id':order_id},
+		dataType:"json",
+		success:function(res){
+			if(res['code']>0){
+				$.msg("取消订单成功");
+				location.href=__URL("SHOP_MAIN/member/index");
+			}else{
+				$.msg(res['message']);
+			}
+		}
+	})
+}
+</script>
+{/block}

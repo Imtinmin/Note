@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="__TEMP__/{$style}/public/css/purchase_consulting.css">
+<div class="ncs-goods_main goods-detail-con">
+<div class="ncs-goods-info-content bd" id="ncGoodsConsult">
+	<h3 class="color">购买咨询</h3>
+	<div id="consulting_demo" class="ncs-loading">
+		<div class="top" style="overflow: hidden;">
+			<div class="ncs-cosult-tips">
+				<i></i>
+				<p></p>
+				<p>因厂家更改商品包装、场地、附配件等不做提前通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！</p>
+				<p></p>
+			</div>
+			<div class="ncs-cosult-askbtn">
+				<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_id.'#askQuestion')}"
+					target="_blank" class="btn btn-white"> 我要咨询</a>
+			</div>
+		</div>
+		<div class="ncs-goods-title-nav">
+			<ul id="consulting_tab">
+				<input type="hidden" id="currClassId" value="0">
+				<li id="classTab0" class="current"><a
+					href="javascript:;" onclick="consultType(0,this)">全部</a></li>
+				<li id="classTab1"><a
+					href="javascript:;" onclick="consultType(1,this)">商品咨询</a></li>
+				<li id="classTab2"><a
+					href="javascript:;" onclick="consultType(2,this)">支付问题</a></li>
+				<li id="classTab3"><a
+					href="javascript:;" onclick="consultType(3,this)">发票及保修</a></li>
+			</ul>
+		</div>
+			{volist name="consult_list" id="item"}
+			
+			{if condition="$key eq 0"}
+				<div id="ncs_main_{$key}" name="nsc_main">
+			{else /}
+				<div style="display: none;" id="ncs_main_{$key}" name="nsc_main">
+			{/if}
+			
+			{if condition="$item['total_count'] eq 0"}
+				<div class="ncs-cosult-main" >
+					<div class="ncs-norecord">还没有咨询内容</div>
+				</div>
+			{else /}
+				<div class="ncs-commend-main" >
+					<!-- 咨询列表s -->
+					{volist name="item['data']" id="vo"}
+							<div class="ncs-cosult-list" >
+								<dl class="asker">
+									<dt>咨询用户：</dt>
+									<dd>
+										{if condition="$vo.member_name eq ''"}
+										游客
+										{else /}
+										{$vo.member_name}
+										{/if}
+										<span>咨询类型：
+										{if condition="$vo.ct_id eq 1"}
+											商品咨询
+										{elseif condition="$vo.ct_id eq 2"/}
+											支付问题
+										{else/}
+											发票及保修
+										{/if}
+										</span>
+										<time datetime="" pubdate="pubdate" class="m-l-20">[{$vo.consult_addtime | getTimeStampTurnTime}]</time>
+									</dd>
+								</dl>
+								<dl class="ask-con">
+									<dt>咨询内容：</dt>
+									<dd>
+										<p>{$vo.consult_content}</p>
+									</dd>
+								</dl>
+								{if condition="$vo.consult_reply neq ''"}
+									<!-- 回复内容s -->
+								<dl class="reply">
+									<dt>商家回复：</dt>
+									<dd>
+										<p>{$vo.consult_reply}</p>
+										<time  pubdate="pubdate">[{$vo.consult_reply_time | getTimeStampTurnTime}]</time>
+									</dd>
+								</dl>
+								<!-- 回复内容e -->
+								{/if}
+							</div>
+							
+						{/volist}
+				<div class="more">
+					<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_id)}" target="_blank">查看全部咨询&gt;&gt;</a>
+				</div>
+			</div>
+		{/if}
+		</div>
+		{/volist}
+	</div>
+	</div>
+	<script type="text/javascript">
+		function consultType(type,eve){
+			$('.current').removeClass('current');
+			$(eve).parent().addClass('current');
+			$('[name="nsc_main"]').hide();
+			$('#ncs_main_'+Number(type)).show();
+		}
+	</script>
+</div>
+</div>

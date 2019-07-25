@@ -1,0 +1,57 @@
+<div class="w1210 ad-groups ad-groups5">
+	<div class="ad-groups5-layout">
+		<div class="ad-groups5-list"></div>
+		<script type="text/javascript">
+			var ap_id = [ap_id];
+			var data = platformAdvLoad(ap_id);
+			var html = '';//0 1 2 3 4 5	,0:3,1:4,2:5
+			if(data[0]['adv_image'] != ''){
+				for (var i = 0; i < data.length; i++) {
+					if(i == 0 || i == 3){
+						//第一个
+						html += '<div class="item">';
+						if(data[i]['adv_url'] == ""){
+	
+							html += '<a class="ad-img" href="'+data[i]['adv_url']+'" >';
+						}else{
+	
+							html += '<a class="ad-img" target="_blank" href="'+data[i]['adv_url']+'" >';
+						}
+							html += '<img class="lazy" src="__UPLOAD__/'+data[i]['adv_image']+'" style="display: inline;height:100%;max-width:100%;">';
+						html += '</a>';
+						html +='</div>';
+					}else if(i == 1 || i == 4){
+						//第二个
+						html += '<div class="item-children">';
+							html += '<div class="item-float">';
+							if(data[i]['adv_url'] == ""){
+	
+								html += '<a class="ad-img" href="'+data[i]['adv_url']+'" >';
+							}else{
+	
+								html += '<a class="ad-img" target="_blank" href="'+data[i]['adv_url']+'" >';
+							}
+							html += '<img class="lazy" src="__UPLOAD__/'+data[i]['adv_image']+'" style="display: inline;height:100%;max-width:100%;">';
+							html += '</a></div>';
+					}else if(i == 2 || i == 5){
+						//第三个
+						html += '<div class="item-float" style="margin-top:14px;">';
+	
+						if(data[i]['adv_url'] == ""){
+	
+							html += '<a class="ad-img" href="'+data[i]['adv_url']+'" >';
+						}else{
+	
+							html += '<a class="ad-img" target="_blank" href="'+data[i]['adv_url']+'" >';
+						}
+						html += '<img class="lazy" src="__UPLOAD__/'+data[i]['adv_image']+'" style="display: inline;height:100%;max-width:100%;">';
+						html += '</a></div></div>';
+					}
+				}
+				$('.ad-groups5-list').html(html);
+			}else{
+				$(".ad-groups5").hide();
+			}
+		</script>
+	</div>
+</div>

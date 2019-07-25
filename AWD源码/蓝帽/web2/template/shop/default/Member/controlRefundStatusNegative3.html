@@ -1,0 +1,74 @@
+		<div class="alert">
+	      <h4>操作提示：</h4>
+	      <ul>
+	        <li>1. 商家已拒绝您的上次申请！请重新填写正确信息完后等待商家处理退款申请</li>
+	        <li>2. 如果商家同意，退款申请将达成并退款至您的支付宝账号或银行卡中。</li>
+	      </ul>
+	    </div>
+	    
+	    
+          <h3>如果商家不同意，可以再次申请或投诉。</h3>
+          	<dt>处理方式：</dt>
+          	<dd><select id="refund_require">
+					{if condition="$detail.refund_type eq 1"}
+						<option value="1" selected="selected">我要退款，但不退货</option>
+						{else}<option value="1">我要退款，但不退货</option>
+					{/if}
+					{neq name="$detail.shipping_status" value="3"} 
+						{if condition="$detail.refund_type eq 2"}
+						<option value="2" selected="selected">我要退款，并且退货</option>
+						{else }<option value="2">我要退款，并且退货</option>
+						{/if} 
+					{/neq}
+				</select></dd>
+          </dl>
+          
+          <dl>
+            <dt>退款原因：</dt>
+            <dd><select id="refund_reason">
+					{if condition="$detail.refund_reason eq '买/卖双方协商一致'"}
+						<option value="买/卖双方协商一致" selected="selected">买/卖双方协商一致</option>
+						{else}<option value="买/卖双方协商一致">买/卖双方协商一致</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '买错/多买/不想要'"}
+						<option value="买错/多买/不想要" selected="selected">买错/多买/不想要</option>
+						{else}<option value="买错/多买/不想要">买错/多买/不想要</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '商品质量问题'"}
+						<option value="商品质量问题" selected="selected">商品质量问题</option>
+						{else}<option value="商品质量问题">商品质量问题</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '未收到货品'"}
+						<option value="未收到货品" selected="selected">未收到货品</option>
+						{else}<option value="未收到货品">未收到货品</option>
+					{/if}
+					{if condition="$detail.refund_reason eq '其他'"}
+						<option value="其他" selected="selected">其他</option>
+						{else}<option value="其他">其他</option>
+					{/if}
+				</select>
+			</dd>
+          </dl>
+          <dl>
+            <dt><i class="required">*</i>退款金额：</dt>
+            <dd><input value="" id="refund_money" class="maxRefund" type="text" placeholder="最多可退款{$refund_money}元" onblur="maxRefund()">
+					<input value="{$refund_money}" id="maxRefundMoney" type="hidden" /> 元</dd>
+          </dl>
+          {if condition="$detail.refund_reason eq '其他'"}
+          	<dl id="description_dl">
+          {else}
+          	<dl id="description_dl" style="display: none;">
+          {/if}
+            <dt><i class="required">*</i>退款说明：</dt>
+            <dd>
+              <textarea name="buyer_message" id="description" rows="3" class="textarea w400"></textarea>
+              <br>
+              <span class="error"></span> </dd>
+          </dl>
+  
+          <div class="bottom">
+            <label class="submit-border">
+            <input type="submit" name="submit" class="main-btn main-btn-large" value="确认提交" onclick="btnSave()">
+            </label>
+            <a href="javascript:history.go(-1);" class="main-btn main-btn-large">取消并返回</a>
+          </div>

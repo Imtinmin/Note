@@ -1,0 +1,90 @@
+{extend name="shop/blue/base" /}
+{block name="resources"}
+<!-- 添加css、字体文件文件 -->
+<style type="text/css">
+.bought-table .order-bd .no-border-right {border-right: #E6E6E6 solid 1px;}
+.member-main .tabmenu .tab li.active a{color:#FFF;}
+</style>
+{/block}
+{block name="main"}
+<div class="margin-w1210">
+	{include file='shop/blue/Member/controlLeftMenu'/}
+	<div class="member-main">
+		<div class="box">
+			<div class="tabmenu">
+				<ul class="tab pngFix">
+					<li class="first active">收货地址列表</li>
+				</ul>
+			</div>
+			<div class="alert alert-success">
+				<h4>操作提示：</h4>
+				<ul>
+					<li>您可对已有的地址进行编辑及删除，亦可新增收货地址</li>
+				</ul>
+			</div>
+			<div class="tabmenu">
+				<input type="button" value="新增收货地址" onclick="location.href='{:__URL('SHOP_MAIN/member/addressinsert')}'" class="main-btn common-btn" />
+			</div>
+			{if condition="$total_count neq ''"}
+			<div>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="bought-table">
+					<thead>
+						<tr class="col-name">
+							<th width="15%" style="border-left: 1px solid #E6E6E6;">收货人</th>
+							<th width="25%">所在地区</th>
+							<th width="25%">详细地址</th>
+							<th width="15%">手机号</th>
+							<th width="18%" style="border-right: 1px solid #E6E6E6;">操作</th>
+						</tr>
+					</thead>
+					<tbody class="close-order" id="list_address">
+					{volist name="list['data']" id="new" key="k" }
+						<tr class="order-bd last">
+							<td align="center" class="baobei no-border-right order_goods_info"><div class="last">{$new.consigner}</div></td>
+							<td align="center" class="baobei no-border-right order_goods_info"><div class="last">{$new.address_info}</div></td>
+							<td align="center" class="baobei no-border-right order_goods_info"><div class="last">{$new.address}</div></td>
+							<td align="center" class="baobei no-border-right order_goods_info"><div class="last">{$new.mobile}</div></td>
+							<td align="center" class="baobei no-border-right order_goods_info">
+								<div class="last">
+									<a href="{:__URL('SHOP_MAIN/member/updatememberaddress','id='.$new['id'])}" class="main-btn main-btn-large">修改</a> 
+									{if condition="$new.is_default neq 1"}
+									<a href="javascript:void(0);" onclick="address_delete({$new.id})" class="main-btn main-btn-large">删除</a>
+									{/if}
+								</div>
+							</td>
+						</tr>
+					{/volist}
+					</tbody>
+				</table>
+			</div>
+			{else/}
+			<div>
+				<div class="emptyFrame"><i class="user_address"></i><span>您还没有添加收货地址哦！</span></div>
+			</div>
+			{/if}
+			<div class="blank10"></div>
+			{include file='shop/blue/controlCommonPage'/}
+		</div>
+	</div>
+</div>
+{/block}
+{block name="RightSideBar"}{/block}
+{block name="javascript"}
+<script type="text/javascript">
+function address_delete(id){
+	$.ajax({
+		url: "{:__URL('SHOP_MAIN/member/memberaddressdelete')}",
+		data: { "id": id },
+		type: "post",
+		success: function (res) {
+			if (res["code"] == 1) {
+				$.msg("删除成功!");
+				window.location.href=window.location.href;
+			} else {
+				$.msg(res["outmessage"]);
+			}
+		}
+	})
+}
+</script>
+{/block}

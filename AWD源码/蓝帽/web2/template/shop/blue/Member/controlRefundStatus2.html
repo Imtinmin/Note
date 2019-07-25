@@ -1,0 +1,34 @@
+<!--已收到货 begin-->
+<div class="alert">
+	<h4>请退货并填写物流信息：</h4>
+	<ul>
+		<li>1. 请退货未经卖家同意，请不要使用到付或平邮。</li>
+		<li>2. 请填写退货物流信息 <small>（逾期未填写，退货申请将关闭）</small></li>
+	</ul>
+</div>
+	
+<h3>物流</h3>
+<dl>
+	<dt>退货地址：</dt>
+	<dd>
+		{if condition="$shop_info.shop_address neq ''"}
+			{$shop_info.shop_address}&nbsp;&nbsp;{$shop_info.seller_name}&nbsp;&nbsp;{$shop_info.seller_mobile}&nbsp;&nbsp;{$shop_info.seller_zipcode}
+		{else /}
+			该商家暂未配置收货地址
+		{/if}
+	</dd> 
+</dl>
+<dl>
+	<dt>物流公司：</dt>
+	<dd><input type="text" class="inputBg" id="LogisticsCompany" /></dd>
+</dl>
+<dl>
+	<dt>运单号码</dt>
+	<dd><input type="text" class="inputBg" id="ExpressNo" /></dd>
+</dl>
+<div class="bottom">
+	<label class="submit-border">
+		<input type="submit" name="submit" class="common-btn" value="确认提交" onclick="ExpressSave()" />
+	</label>
+	<a href="javascript:history.go(-1);" class="main-btn main-btn-large">取消并返回</a>
+</div>

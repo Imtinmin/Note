@@ -1,0 +1,405 @@
+{extend name="shop/default/Member/base" /}
+{block name="resources"}
+<link href="__TEMP__/{$style}/public/css/order/ns_order_detail.css" rel="stylesheet">
+<link href="__TEMP__/{$style}/public/css/plugin/tooltips.css" rel="stylesheet">
+<script src="__TEMP__/{$style}/public/js/plugin/jquery.pure.tooltips.js"></script>
+<style>
+.goods-items td{
+	padding:2px 5px;
+}
+
+</style>
+{/block}
+{block name="main"}
+<div class="user-right">
+	<div class="box">
+		<div class="tabmenu">
+			<ul class="tab pngFix">
+				<li class="first active">订单详情</li>
+			</ul>
+		</div>
+		<div style="float:left;width:50%;display: inline-block;">
+			<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee" class="order_detail">
+				<tr>
+					<td width="20%" align="right" bgcolor="#ffffff">订单编号：</td>
+					<td align="left" bgcolor="#ffffff">{$order.order_no}</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff">订单状态：</td>
+					<td align="left" bgcolor="#ffffff">{$order.status_name}</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff">付款方式：</td>
+					<td align="left" bgcolor="#ffffff">{$order.payment_type_name}</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff">付款状态：</td>
+					<td align="left" bgcolor="#ffffff">{$order.pay_status_name}</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff">配送方式：</td>
+					<td align="left" bgcolor="#ffffff">{$order.shipping_type_name}&nbsp;&nbsp;{$order['shipping_company_name']}</td>
+				</tr>
+				{switch name="$order.shipping_type"}
+					{case value="1"}
+					<tr>
+						<td align="right" bgcolor="#ffffff">收货信息：</td>
+							<td align="left" bgcolor="#ffffff">{$order['receiver_name']}，{$order['receiver_mobile']}，{$order['address']}{$order['receiver_address']}{if condition="$order['receiver_zip']!=''"}&nbsp;，{$order['receiver_zip']}{/if}</td>
+					</tr>
+					{/case}
+					{case value="2"}
+					<tr>
+						<td align="right" bgcolor="#ffffff">自提地址：</td>
+						<td align="left" bgcolor="#ffffff">{$order['order_pickup']['province_name']}&nbsp;{$order['order_pickup']['city_name']}&nbsp;{$order['order_pickup']['dictrict_name']}&nbsp;{$order['order_pickup']['address']}</td>
+					</tr>
+					{/case}
+				{/switch}
+				
+				{if condition="!empty($order['buyer_invoice_info'])"}
+				<tr>
+					<td align="right" bgcolor="#ffffff">发票抬头：</td>
+					<td align="left" bgcolor="#ffffff">
+						{if condition="!empty($order['buyer_invoice_info'][0])"}
+						{$order['buyer_invoice_info'][0]}
+						{/if}
+					</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff" style="width: 22%;">纳税人识别号：</td>
+					<td align="left" bgcolor="#ffffff">
+						{if condition="!empty($order['buyer_invoice_info'][2])"}
+						{$order['buyer_invoice_info'][2]}
+						{else/}
+						-
+						{/if}
+					</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#ffffff">发票内容：</td>
+					<td align="left" bgcolor="#ffffff">
+						{if condition="!empty($order['buyer_invoice_info'][1])"}
+						{$order['buyer_invoice_info'][1]}
+						{/if}
+					</td>
+				</tr>
+				{/if}
+				{if condition="$order['buyer_message'] != ''"}
+				<tr>
+					<td align="right" bgcolor="#ffffff">买家留言：</td>
+					<td>{$order['buyer_message']}</td>
+				</tr>
+				{else/}
+				<tr>
+					<td align="right" bgcolor="#ffffff">买家留言：</td>
+					<td>此订单没有留言</td>
+				</tr>
+				{/if}
+				
+			</table>
+		</div>
+		
+		{if condition="$order.order_status eq 0"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+				<dd>订单状态： 订单已经提交，等待买家付款</dd>
+			</dl>
+			<ul>
+				<li>1. 您尚未对该订单进行支付，请支付订单以确保商家及时发货。</li>
+				<li>2. 如果您不想购买此订单的商品，请选择取消订单操作。</li>
+				<li>3. 如果您未对该笔订单进行支付操作，系统将于订单创建 {if condition="$order_buy_close_time eq '' || $order_buy_close_time eq 0 "}60{else /}{$order_buy_close_time | getTimeStampTurnTime}{/if}分钟后 自动关闭该订单。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq 1"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+				<dd>订单状态： 待发货，请耐心等待...</dd>
+			</dl>   
+			<ul >
+				<li>1. 如果您不想购买此订单的商品，请在七天内联系卖家选择退货。</li>
+				<li>2、如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq 2"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+			<dd>订单状态： 已发货，请耐心等待...</dd>
+			</dl>
+			<ul>
+				<li>1. 如果您不想购买此订单的商品，请在七天内联系卖家选择退货。</li>
+				<li>2、如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq 3"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+			<dd>订单状态： 已收货</dd>
+			</dl>
+			<ul>
+				<li>1、交易已成功，如果你还未收到货物，或者收到的货物无法正常使用，请及时联系卖家协商处理。</li>
+				<li>2、如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq 4"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+			<dd>订单状态： 已完成</dd>
+			</dl>
+			<ul>
+				<li>1、交易已成功，如果你还未收到货物，或者收到的货物无法正常使用，请及时联系卖家协商处理。</li>
+				<li>2、如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq 5"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+				<dd>订单状态： 已关闭</dd>
+			</dl>
+			<ul></ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq -1"}
+		<div class="tab_right">
+		<dl>
+			<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+			<dd>订单状态：退款中</dd>
+			</dl>
+			<ul>
+				<li>1、退款中，如果你还未收到钱，或者收到的钱数目不对，请及时联系卖家协商处理。</li>
+				<li>2、如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理。</li>
+			</ul>
+		</div>
+		{/if}
+		
+		{if condition="$order.order_status eq -2"}
+		<div class="tab_right">
+			<dl>
+				<span><img src="__TEMP__/{$style}/public/images/order.jpg" style="width: 30px;height: 30px;margin-left: 30px;margin-right: 10px;"/></span>
+			<dd>订单状态： 已退款</dd>
+			</dl>
+			<ul></ul>
+		</div>
+		{/if}
+		<br/>
+		{if condition="count($order['order_goods_no_delive']) >0"}
+		<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee" ></table>
+		<div class="blank"></div>
+		<div class="tabmenu">
+			<ul class="tab pngFix">
+				<li class="first active">商品列表</li>
+			</ul>
+		</div>
+		
+		<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee" class="goods-items">
+			<tr>
+				<th width="30%" align="center" bgcolor="#ffffff">商品名称</th>
+				<th width="20%" align="center" bgcolor="#ffffff">属性</th>
+				<th width="15%" align="center" bgcolor="#ffffff">商品价格</th>
+				<th width="10%" align="center" bgcolor="#ffffff">购买数量</th>
+				<th width="15%" align="center" bgcolor="#ffffff">小计</th>
+				<th width="10%" align="center" bgcolor="#ffffff">配送状态</th>
+			</tr>
+			{volist name="order['order_goods_no_delive']" id="goodsData"}
+			<tr>
+				<td bgcolor="#ffffff">
+					<div class="ui-centered-image" style="width: 48px; height: 48px;float: left;margin-right: 10px;">
+						<img src="__ROOT__/{$goodsData['picture_info']['pic_cover_micro']}" style="max-width: 48px;max-height: 48px;">
+					</div>
+					<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goodsData['goods_id'])}" target="_blank">{$goodsData.goods_name}</a>
+				</td>
+				<td align="center" bgcolor="#ffffff">
+				{if condition = "$goodsData['sku_name'] neq ''"}
+					{$goodsData.sku_name}
+				{/if}
+				</td>
+				<td align="center" bgcolor="#ffffff">￥{$goodsData.price}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsData.num}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsData.goods_money}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsData.shipping_status_name}</td>
+			</tr>
+			{/volist}
+		</table>
+		{/if}
+		{foreach name="order['goods_packet_list']" id="vo"}
+		<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee" style="margin-top:15px;">
+			<tr>
+				<th width="30%" align="left" >
+					<span>{$vo.packet_name}</span>
+					{if condition="$vo.is_express == 1"}
+					<span>{$vo.express_name}：</span>
+					<span>{$vo.express_code}</span>
+					{/if}
+				</th>
+				<th width="20%"></th>
+				<th width="15%">
+					{if condition="$vo.is_express == 1"}
+					<a class="js-query-logistics" data-express-code="{$vo.express_code}" data-express-name="{$vo.express_name}" data-express-id="{$vo.express_id}" href="javascript:;">查询物流</a>
+					{/if}
+				</th>
+				<th width="10%"></th>
+				<th width="15%"></th>
+				<th width="10%"></th>
+			</tr>
+			{volist name="vo['order_goods_list']" id="goodsvo"}
+			<tr>
+				<td bgcolor="#ffffff">
+					<div class="ui-centered-image" style="width: 48px; height: 48px;float: left;margin-right: 10px;">
+						<img src="__ROOT__/{$goodsvo['picture_info']['pic_cover_micro']}" style="max-width: 48px;max-height: 48px;">
+					</div>
+					<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goodsvo['goods_id'])}" target="_blank">{$goodsData.goods_name}</a>
+				</td>
+				<td align="center" bgcolor="#ffffff">
+				{if condition = "$goodsvo['sku_name'] neq ''"}
+					{$goodsvo.sku_name}
+				{/if}
+				</td>
+				<td align="center" bgcolor="#ffffff">￥{$goodsvo.price}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsvo.num}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsvo.goods_money}</td>
+				<td align="center" bgcolor="#ffffff">{$goodsvo.shipping_status_name}</td>
+			</tr>
+			{/volist}
+		</table>
+		{/foreach}
+		<div class="blank"></div>
+		<div class="tabmenu">
+			<ul class="tab pngFix">
+				<li class="first active">费用总计</li>
+			</ul>
+		</div>
+		<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
+			<tr>
+				
+			<td colspan="7" align="right" >
+				<span>商品总金额：￥{$order['goods_money']}，</span>
+				
+				{if condition="$order['user_platform_money']>0"}
+				<span>余额支付：￥{$order['user_platform_money']}，</span>
+				{/if}
+				
+				{if condition="$order['coupon_money']>0"}
+				<span>优惠券：￥{$order['coupon_money']}，</span>
+				{/if}
+				
+				{if condition="$order['tax_money']>0"}
+				<span>发票税额：￥{$order['tax_money']}，</span>
+				{/if}
+				
+				{if condition="$order['promotion_money']>0"}
+				<span>满减优惠：￥{$order['promotion_money']}，</span>
+				{/if}
+				
+				{if condition="$order['point']>0"}
+				<span>使用积分：{$order['point']}，</span>
+				{/if}
+				
+				<span> 实际需支付：<b style="color: #f44;">￥{$order['pay_money']}</b></span>
+				<span>（含运费 ￥{$order['shipping_money']}）</span>
+			</td>
+			</tr>
+		</table>
+	</div>
+</div>
+{/block}
+{block name="javascript"}
+<script>
+$(function(){
+	
+	//查询物流
+	$(".js-query-logistics").mouseover(function(){
+		$(".js-query-logistics").removeAttr("data-show");
+		$(this).attr("data-show",1);
+	});
+
+	var html = '<div class="silider-express">';
+		html += '<div class="mask-layer-loading" style="text-align:center;">';
+		html += '<img src="ADMIN_IMG/mask_load.gif"/>';
+		html += '<div style="text-align:center;margin-top:10px;">努力加载中...</div>';
+		html += '</div>';
+		html += '</div>';
+	$('.js-query-logistics').pt({
+		content: html,
+		position : 'l',
+		open : function(res){
+			var curr_express = $(".js-query-logistics[data-show]");
+			var express_id = curr_express.attr("data-express-id");
+			var express_name = curr_express.attr("data-express-name");
+			var express_code = curr_express.attr("data-express-code");
+			if(express_id != undefined && express_name != undefined){
+				if(curr_express.attr("data-express-info") == undefined){
+					$.ajax({
+						type : "post",
+						url : "{:__URL('SHOP_MAIN/member/getordergoodsexpressmessage')}",
+						data : {"express_id":express_id},
+						success : function(data) {
+							var html = "";
+							if (data['Success'] == true) {
+								html += '<div class="logistics-tip">';
+									html += '<div class="title">'+express_name+'&nbsp;&nbsp;&nbsp;运单号：'+express_code+'</div>';
+									html += '<div class="content">';
+										html += '<ul>';
+										for (var i = 0; i < data["Traces"].length; i++){
+											if(i==0){
+												html += '<li class="first">';
+											}else{
+												html += '<li>';
+											}
+												html += '<i class="node-icon"></i>';
+												html += '<a href="" target="_blank">'+data["Traces"][i]["AcceptStation"]+'</a>';
+												html += '<div class="ftx-13">'+timeStampTurnTime(data["Traces"][i]["AcceptTime"])+'</div>';
+											html += '</li>';
+										}
+										html += '</ul>';
+									html += '</div>';
+								html += '</div>';
+							} else {
+								html += '<p style="margin:5px 0;">'+ data["Reason"]+'</p>';
+								//测试用
+// 								html += '<div class="logistics-tip">';
+// 									html += '<div class="title">'+express_name+'&nbsp;&nbsp;&nbsp;运单号：'+express_code+'</div>';
+// 									html += '<div class="content">';
+// 										html += '<ul>';
+// 											html += '<li class="first">';
+// 												html += '<i class="node-icon"></i>';
+// 												html += '<a href="" target="_blank">[太原市] 太原市【太原南中环分部】，拍照签收 已签收</a>';
+// 												html += '<div class="ftx-13">2017-06-18 12:12:09</div>';
+// 											html += '</li>';
+											
+// 											html += '<li>';
+// 												html += '<i class="node-icon"></i>';
+// 												html += '<a href="" target="_blank">[太原市] 太原市【太原南中环分部】，【苏雄雄/15333430406】正在派件</a>';
+// 												html += '<div class="ftx-13">2017-06-18 12:11:14</div>';
+// 											html += '</li>';
+// 										html += '</ul>';
+// 									html += '</div>';
+// 								html += '</div>';
+							}
+							res.html(html);
+							curr_express.attr("data-express-info",html);//保存物流信息
+						}
+					});
+				}else{
+					res.html(curr_express.attr("data-express-info"));
+				}
+			}
+		}
+	});
+})
+</script>
+{/block}

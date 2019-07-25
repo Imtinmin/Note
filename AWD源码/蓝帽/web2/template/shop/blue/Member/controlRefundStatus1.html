@@ -1,0 +1,35 @@
+<!-- 提示 -->
+<div class="alert">
+	<h4>操作提示：</h4>
+	<ul>
+		<li>1. 等待商家处理退款申请， 如果商家同意，退款申请将达成并退款至您的支付宝账号或银行卡中。</li>
+	</ul>
+</div>
+	
+<h3>如果商家不同意，可以再次申请或投诉。</h3>
+<dl>
+	<dt>处理方式：</dt>
+	
+	<dd>
+	{if condition="$detail['refund_type'] eq 1"}
+	我要退款，但不退货
+	{elseif condition="$detail['refund_type'] eq 2" /}
+	我要退款，并且退货
+	{/if}
+	
+	</dd>
+</dl>
+
+<dl>
+	<dt>退款原因：</dt>
+	<dd>{$detail['refund_reason']}</dd>
+</dl>
+
+<dl>
+	<dt><i class="required">*</i>退款金额：</dt>
+	<dd>{$detail['refund_require_money']} 元</dd>
+</dl>
+	
+<div class="bottom">
+	<a href="javascript:history.go(-1);" class="main-btn main-btn-large">返回列表&gt;&gt;</a>
+</div>

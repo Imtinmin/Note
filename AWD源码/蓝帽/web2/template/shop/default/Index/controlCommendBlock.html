@@ -1,0 +1,70 @@
+{if condition="count($recommend_block) >0"}
+<div class="w1210 index-sale">
+	<ul class="tabs-nav">
+		{foreach name="recommend_block" item="recommend" key="k"}
+		<li {if condition="$k eq 0" }class="tabs-selected"{/if}>
+			<i class="arrow"></i>
+			<h3>{$recommend.class_name}</h3></li>
+		{/foreach}
+	</ul>
+	{foreach name="recommend_block" item="recommend_detail" key="k"}
+	{if condition="$k eq 0" }
+	<div class="tabs-panel sale-goods-list">
+	{else/}
+	<div class="tabs-panel sale-goods-list tabs-hide">
+	{/if}
+		<ul>
+		{foreach name="recommend_detail['goods_list']" item="goods_list"}
+			<li>
+				<dl>
+					<dt class="goods-name">
+						<a title="{$goods_list.goods_info.goods_name}" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods_list['goods_info']['goods_id'])}" target="_blank">{$goods_list.goods_info.goods_name}</a>
+					</dt>
+					<dd class="goods-thumb">
+						<a title="{$goods_list.goods_info.goods_name}" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods_list['goods_info']['goods_id'])}" target="_blank">
+							<img src="__UPLOAD__/{$goods_list.picture_info.pic_cover_mid}" />
+						</a>
+					</dd>
+					<dd class="goods-price">
+						<em class="second-color" style="font-size:18px;">￥{$goods_list.goods_info.promotion_price}</em>
+					</dd>
+				</dl>
+			</li>
+		{/foreach}
+		</ul>
+	</div>
+	{/foreach}
+</div>
+</div>
+{/if}
+<div class="w1210 ad-groups ad-groups5">
+	<div class="ad-groups5-layout">
+		<div class="ad-groups5-list" ></div>
+		<script type="text/javascript">
+			var ap_id=[ap_id];
+			var data=platformAdvLoad(ap_id);
+			var listhtml='';
+			if(data != '' ){
+				if(data[0]['adv_image'] == ""){
+					$(".ad-groups5").hide();
+				}else{
+					
+					for(var i=0;i<data.length;i++){
+						if(i==5){
+							break;
+						}
+						listhtml+='<div class="item">';
+						if(data[i]['adv_url'] == ""){
+							listhtml+='<a class="ad-img" href="'+data[i]['adv_url']+'" >';
+						}else{
+							listhtml+='<a class="ad-img" target="_blank" href="'+data[i]['adv_url']+'" >';
+						}
+						listhtml+='<img class="lazy" src="__UPLOAD__/'+data[i]['adv_image']+'" style="display: inline;height:140px;width:240px;max-width:100%;">';
+						listhtml+='</a></div>';
+					}
+					$('.ad-groups5-list').html(listhtml);
+				}
+			}
+		</script>
+	</div>
+</div>

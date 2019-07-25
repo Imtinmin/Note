@@ -1,0 +1,7 @@
+.alert-replies{margin: 15px 10px; background: #f1f1f1;}
+.alert-replies .reply-date{margin-right: 10px;}
+.alert-replies hr:last-child{display: none;}
+.reply-content+.article-files{margin-top: 8px;}
+.alert-replies .reply-content{display: inline;}
+.alert-replies > .second-replies{margin-left: 10px; margin-bottom: 10px; padding: 10px 10px 0; background: #fff;}
+.alert-replies .files-list > li.files-list-heading {display:none;}

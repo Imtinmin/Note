@@ -1,0 +1,52 @@
+ 		<!-- 提示 -->
+ 		<div class="alert">
+	      <h4>操作提示：</h4>
+	      <ul>
+	        <li>1. 若您对订单进行支付后想取消购买且与商家达成一致退款，请填写<em>“订单退款”</em>内容并提交。</li>
+	        <li>2. 成功完成退款/退货；经过商家通过后，会将退款金额以<em>“预存款”</em>的形式返还到您的余额账户中（充值卡部分只能退回到充值卡余额）。</li>
+	      </ul>
+	    </div>
+	    
+	    
+          <h3>如果商家不同意，可以再次申请或投诉。</h3>
+          <dl>
+          	<dt>处理方式：</dt>
+          	<dd><select
+					id="refund_require">
+					<option value="1" selected="selected">我要退款，但不退货</option>
+					{neq name="detail['shipping_status']" value="0"}
+					<option value="2">我要退款，并且退货</option>
+					{/neq}
+				</select></dd>
+          </dl>
+          
+          <dl>
+            <dt>退款原因：</dt>
+            <dd><select id="refund_reason">
+					<option value="买/卖双方协商一致">买/卖双方协商一致</option>
+					<option value="买错/多买/不想要">买错/多买/不想要</option>
+					<option value="商品质量问题">商品质量问题</option>
+					<option value="未收到货品">未收到货品</option>
+					<option value="其他">其他</option>
+				</select>
+			</dd>
+          </dl>
+          <dl>
+            <dt><i class="required">*</i>退款金额：</dt>
+            <dd><input value="" id="refund_money" class="maxRefund" type="text" placeholder="最多可退款{$refund_money}元" onblur="maxRefund()">
+					<input value="{$refund_money}" id="maxRefundMoney" type="hidden" /> 元</dd>
+          </dl>
+          <dl  id="description_dl" style="display: none;">
+            <dt><i class="required">*</i>退款说明：</dt>
+            <dd>
+              <textarea name="buyer_message" id="description" rows="3" class="textarea w400"></textarea>
+              <br>
+              <span class="error"></span> </dd>
+          </dl>
+  
+          <div class="bottom">
+            <label class="submit-border">
+            <input type="submit" name="submit" class="main-btn main-btn-large" value="确认提交" onclick="btnSave()">
+            </label>
+            <a href="javascript:history.go(-1);" class="main-btn main-btn-large">取消并返回</a>
+          </div>

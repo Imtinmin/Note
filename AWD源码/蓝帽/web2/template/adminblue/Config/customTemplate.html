@@ -1,0 +1,59 @@
+{extend name="adminblue/base" /}
+{block name="resources"/}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/defau.css">
+<link rel="stylesheet" href="ADMIN_CSS/plugin/tooltips.css">
+<link rel="stylesheet" href="__STATIC__/custom_template/css/custom_template.css">
+<script type="text/javascript" charset="utf-8" src="ADMIN_JS/ueditor/ueditor.config.common.js"></script>
+<script type="text/javascript" charset="utf-8" src="ADMIN_JS/ueditor/ueditor.all.common.js"></script>
+{/block}
+{block name="main"}
+<article class="custom-resolution">
+	<button class="btn-common" data-width="320">320*0</button>
+	<button class="btn-common" data-width="375">375*0</button>
+	<button class="btn-common" data-width="425">425*0</button>
+	<button class="btn-common" data-width="768">768*0</button>
+	<button class="btn-common" data-width="1024">1024*0</button>
+</article>
+<article class="custom-template">
+	<header>
+		<img src="__STATIC__/custom_template/img/titlebar.png" />
+	</header>
+	<div class="custom-main"></div>
+	<div class="caret-up"></div>
+	<div class="plug-in">
+		<h4>添加内容</h4>
+		<ul>
+			<li data-control-name="GoodsSearch" data-class-name="control-search draggable-element">商品搜索</li>
+			<li data-control-name="Carousel" data-class-name="control-carousel carousel slide draggable-element" data-additional-attr="id='carouselControl'">轮播图</li>
+			<li data-control-name="GoodsList" data-class-name="control-goods-list draggable-element">商品列表</li>
+			<li data-control-name="Title" data-class-name="control-title draggable-element">标题</li>
+			<li data-control-name="NavText" data-class-name="control-nav-text draggable-element">文字导航</li>
+			<li data-control-name="Notice" data-class-name="control-notice draggable-element">公告</li>
+			<li data-control-name="ImgAd" data-class-name="control-img-ad carousel draggable-element" data-additional-attr="id='carouselImgAd'">图片广告</li>
+			<li data-control-name="NavHybrid" data-class-name="control-nav-img draggable-element">图片导航</li>
+			<li data-control-name="GoodsClassify" data-class-name="control-goods-classify draggable-element">商品分类</li>
+			<li data-control-name="Footer" data-class-name="control-footer draggable-element">底部菜单</li>
+			<li data-control-name="CustomModule" data-class-name="control-custom-module draggable-element">自定义模块</li>
+			<!-- 用户可以自己写代码，右侧出来一个富文本编辑器  -->
+			<li data-control-name="AuxiliaryLine" data-class-name="control-auxiliary-line draggable-element">辅助线</li>
+			<li data-control-name="AuxiliaryBlank" data-class-name="control-auxiliary-blank draggable-element">辅助空白</li>
+			<li data-control-name="Coupons" data-class-name="control-coupons" class="disabled">优惠券</li>
+		</ul>
+	</div>
+	<div style="text-align:center;padding:10px;">
+		<button class="btn-common js-save" style="width: 90%;height:35px;margin:0 !important;">保存</button>
+	</div>
+</article>
+{/block}
+{block name="script"}
+<script>
+var goods_category_list = eval('{$goods_category_list}');//商品分类
+</script>
+<script src="ADMIN_JS/plugin/drag-arrange.js"></script>
+<script src=ADMIN_JS/plugin/jquery.pure.tooltips.js></script>
+<script src="ADMIN_JS/ajax_file_upload.js" type="text/javascript"></script>
+<script src="__STATIC__/js/file_upload.js" type="text/javascript"></script>
+<script src="__STATIC__/custom_template/js/custom_template.js"></script>
+<script src="__STATIC__/custom_template/js/custom_control_add.js"></script>
+<script src="__STATIC__/custom_template/js/custom_control_edit.js"></script>
+{/block}

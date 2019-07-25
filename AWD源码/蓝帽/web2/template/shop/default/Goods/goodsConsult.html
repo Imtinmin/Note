@@ -1,0 +1,218 @@
+{extend name="shop/default/base" /} {block name="resources"}
+<link rel="stylesheet" href="__TEMP__/{$style}/public/css/purchase_consulting.css">
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/jquery.charcount.js"></script>
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/consult.js"></script>
+<style>
+.btn:hover{
+	color:#ffffff;
+}
+</style>
+{/block} {block name="main"}
+<div class="w1210">
+	<div class="breadcrumb clearfix">
+		<a href="{:__URL('SHOP_MAIN')}" class="index">首页&nbsp;&gt;&nbsp;</a> <span
+			class="last">{$goods_info.category_name}{$goods_info.goods_name}</span>
+	</div>
+	<div class="wrapper">
+		<div class="ncs-goods-layout expanded">
+			<div class="ncs-goods-main">
+				<div class="ncs-goods-title-bar">
+					<h4>购买咨询</h4>
+				</div>
+				<div class="ncs-goods-info-content bd" id="ncGoodsRate">
+					<div class="top" style="overflow: hidden;">
+						<div class="ncs-cosult-tips">
+							<i></i>
+							<p></p>
+							<p>因厂家更改商品包装、场地、附配件等不做提前通知，且每位咨询者购买、提问时间等不同。为此，客服给到的回复仅对提问者3天内有效，其他网友仅供参考！给您带来的不便还请谅解，谢谢！</p>
+							<p></p>
+						</div>
+						<div class="ncs-cosult-askbtn">
+							<a href="#askQuestion" class="btn btn-white"><i
+								class="fa fa-comments-o"></i>我要咨询</a>
+						</div>
+					</div>
+					<div class="ncs-goods-title-nav">
+						<ul id="consult_tab">
+							<input type="hidden" id="currClassId" value="0">
+							{if condition="$ct_id eq ''"}
+								<li id="classTab0" class="current">
+							{else /}
+								<li id="classTab0">
+							{/if}
+							<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_info['goods_id'].'&ct_id=')}">全部</a></li>
+							
+							{if condition="$ct_id eq 1"}
+								<li id="classTab1" class="current">
+							{else /}
+								<li id="classTab1">
+							{/if}
+							<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_info['goods_id'].'&ct_id=1')}">商品咨询</a></li>
+							
+							{if condition="$ct_id eq 2"}
+								<li id="classTab2" class="current">
+							{else /}
+								<li id="classTab2">
+							{/if}
+							<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_info['goods_id'].'&ct_id=2')}">支付问题</a></li>
+							
+							{if condition="$ct_id eq 3"}
+								<li id="classTab3" class="current">
+							{else /}
+								<li id="classTab3">
+							{/if}
+							<a href="{:__URL('SHOP_MAIN/goods/goodsconsult','goodsid='.$goods_info['goods_id'].'&ct_id=3')}">发票及保修</a></li>
+						</ul>
+					</div>
+					{if condition="$total_count eq 0"}
+					<div class="ncs-cosult-main" >
+						<div class="ncs-norecord">还没有咨询内容</div>
+					</div>
+					{else /}
+					<div class="ncs-commend-main">
+						<!-- 咨询列表s -->
+						{volist name="consult_list" id="vo"}
+							<div class="ncs-cosult-list">
+								<dl class="asker">
+									<dt>咨询用户：</dt>
+									<dd>
+										{if condition="$vo.member_name eq ''"}
+										游客
+										{else /}
+										{$vo.member_name}
+										{/if}
+										<span>咨询类型：
+										{if condition="$vo.ct_id eq 1"}
+											商品咨询
+										{elseif condition="$vo.ct_id eq 2"/}
+											支付问题
+										{else/}
+											发票及保修
+										{/if}
+										</span>
+										<time datetime="" pubdate="pubdate" class="m-l-20">[{$vo.consult_addtime | getTimeStampTurnTime}]</time>
+									</dd>
+								</dl>
+								<dl class="ask-con">
+									<dt>咨询内容：</dt>
+									<dd>
+										<p>{$vo.consult_content}</p>
+									</dd>
+								</dl>
+								{if condition="$vo.consult_reply neq ''"}
+									<!-- 回复内容s -->
+								<dl class="reply">
+									<dt>商家回复：</dt>
+									<dd>
+										<p>{$vo.consult_reply}</p>
+										<time pubdate="pubdate">[{$vo.consult_reply_time | getTimeStampTurnTime}]</time>
+									</dd>
+								</dl>
+								<!-- 回复内容e -->
+								{/if}
+							</div>
+						{/volist}
+						<!-- 咨询列表e -->
+						<!-- 咨询分页s -->
+					
+					</div>
+					{include file='shop/default/controlCommonPage' /}
+					{/if}
+					
+				</div>
+				
+				<!-- S 咨询表单部分 -->
+				<div class="ncs-goods-title-bar" id="askQuestion">
+					<h4>发表咨询</h4>
+				</div>
+
+					<input type="hidden" id="goods_id" name="goods_id" value="{$goods_info.goods_id}"/>
+					<input type="hidden" id="goods_name" name="goods_name" value="{$goods_info.goods_name}"/>
+					<input type="hidden" id="shop_id" name="shop_id" value="{$goods_info.shop_id}"/>
+					
+					<div class="ncs-consult-form">
+						<dl>
+							<dt>咨询类型：</dt>
+							<dd>
+								<label> <input type="radio" checked="checked"
+									nc_type="consultClassRadio" name="classId" class="radio"
+									value="1"> 商品咨询
+								</label> <label> <input type="radio" 
+									nc_type="consultClassRadio" name="classId" class="radio"
+									value="2"> 支付问题
+								</label> <label> <input type="radio" 
+									nc_type="consultClassRadio" name="classId" class="radio"
+									value="3"> 发票及保修
+								</label>
+							</dd>
+						</dl>
+						<div class="ncs-consult-type-intro" id="consultClassIntroduce1"
+							nc_type="consultClassIntroduce" style="display: block;"></div>
+						<div class="ncs-consult-type-intro" id="consultClassIntroduce2"
+							nc_type="consultClassIntroduce" style="display: none;"></div>
+						<div class="ncs-consult-type-intro" id="consultClassIntroduce3"
+							nc_type="consultClassIntroduce" style="display: none;"></div>
+
+						<dl class="ncs-consult">
+							<dt>咨询内容：</dt>
+							<dd>
+								<textarea name="consultContent" id="consultContent" class="textarea w700 h60"></textarea>
+								<span id="consultCharCount"></span>
+								<div nc_type="error_msg"></div>
+							</dd>
+						</dl>
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd>
+								<input id="consultCaptcha" name="consultCaptcha"
+									class="text w60" placeholder="输入验证码" type="text" size="4"
+									autocomplete="off" maxlength="4">
+								<div class="code">
+									<div class="arrow"></div>
+									<div class="code-img">
+										<a nc_type="consultCaptchaChange" href="javascript:void(0)">
+											<img src="{:__URL('SHOP_MAIN/components/random')}" border="0" id="consultCaptchaImage" />
+										</a>
+									</div>
+									<a href="JavaScript:void(0);" id="consultCaptchaHide" class="close" title="关闭"><i></i></a>
+									<a href="JavaScript:void(0);" nc_type="consultCaptchaChange" class="change" title="看不清验证码？点击换一张。"><i></i></a>
+								</div>
+								<a href="JavaScript:void(0);" id="consultSubmit" title="发布咨询"
+									class="btn btn-sm btn-warning m-l-10">发布咨询</a>
+								<div nc_type="error_msg"></div>
+								<input type="hidden" id="isSub" value="true"> 
+							</dd>
+							<!--<dd nctype="error_msg"></dd>-->
+						</dl>
+					</div>
+
+				<!-- E 咨询表单部分 -->
+			</div>
+			<div class="ncs-sidebar">
+				<div class="ncs-sidebar-container">
+					<div class="title">
+						<h4>商品信息</h4>
+					</div>
+					<div class="content">
+						<dl class="ncs-comment-goods">
+							<dt class="goods-name">
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods_info['goods_id'])}">{$goods_info.goods_name}</a>
+							</dt>
+							<dd class="goods-pic">
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods_info['goods_id'])}">
+									<img src='__UPLOAD__/{$goods_info["img_list"][0]["pic_cover_big"]}' alt="{$goods_info.goods_name}" />
+								</a>
+							</dd>
+							<dd class="goods-price">
+								售价：<em class="saleP">￥{$goods_info.promotion_price}</em>
+							</dd>
+							
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

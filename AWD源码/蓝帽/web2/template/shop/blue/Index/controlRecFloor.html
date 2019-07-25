@@ -1,0 +1,280 @@
+<!--
+	创建人：李志伟
+	创建时间：2017年2月7日 12:25:20
+	功能描述：首页，楼层
+-->
+<!-- 内容 -->
+{volist name="web_block_list" id="vo"}
+<div class="w1210 floor-list">
+	<div class="floor" color="{$vo['base_info']['block_color']}">
+		<div class="floor-layout">
+			<div class="floor-con floor-con5">
+				<div class="floor-title">
+					<!--推荐名称-->
+					<span class="vertical-bar" style="background: {$vo['base_info']['block_color']};"></span>
+					<h2>
+						<a href=javascript:;" target="_blank">{$vo['base_info']['block_name']}</a>
+						<input type="hidden" value="{$vo['base_info']['block_short_name']}" class="NS-SHORT-NAME" />
+					</h2>
+					<!--推荐类型-->
+					<ul class="floor-tabs-nav">
+						<!-- 如果多图广告位不为空 -->
+						{if condition="$vo['base_info']['recommend_ad_images'] neq 0"}
+						<li class="floor-tabs-selected"><h3 style="color: {$vo['base_info']['block_color']};">{$vo['base_info']['recommend_ad_images_name']}</h3></li>
+						<li><h3>{$vo['base_info']['recommend_goods_category_name_1']}</h3></li>
+						{else /}
+						<li class="floor-tabs-selected"><h3 style="color: {$vo['base_info']['block_color']};">{$vo['base_info']['recommend_goods_category_name_1']}</h3></li>
+						{/if}
+						<li><h3>{$vo['base_info']['recommend_goods_category_name_2']}</h3></li>
+						<li><h3>{$vo['base_info']['recommend_goods_category_name_3']}</h3></li>
+					</ul>
+				</div>
+				<hr style="border:0;border-bottom:1px solid #F5F5F5;" />
+				<div class="floor-content floor-content5">
+					{if condition="$vo['base_info']['recommend_ad_image'] neq 0"}
+					<div class="floor-left">
+						<div class="floor-ad">
+							<a href="{$vo['recommend_ad_image']['adv_list'][0]['adv_url']}" target="_blank" class="floor-ad-img">
+								<img class="lazy" src="__UPLOAD__/{$vo['recommend_ad_image']['adv_list'][0]['adv_image']}" width="{$vo['recommend_ad_image']['ap_width']}" >
+							</a>
+						</div>
+						<ul class="floor-words">
+<!-- 						分类推荐 -->
+							{volist name="$vo['category_list']" id="item"}
+								<li><a href="{:__URL('SHOP_MAIN/goods/goodslist','category_id='.$item['category_id'])}" target="_blank" title="{$item['category_name']}">{$item['category_name']}</a></li>
+							{/volist}
+						</ul>
+					</div>
+					{/if}
+					{if condition="$vo['base_info']['recommend_ad_slide'] neq 0"}
+					<div class="floor-middle">
+						<div class="floor-banner">
+							<div class="hiSlider-wrap">
+								<ul class="hiSlider NS-FLOOR-HISLIDER">
+									<!-- 幻灯片循环 -->
+									{volist name="$vo['recommend_ad_slide']['adv_list']" id="vohd"} 
+									<li class="hiSlider-item">
+										<a href="{$vohd['adv_url']}" target="_blank">
+											<img class="lazy" src="__UPLOAD__/{$vohd['adv_image']}" width="{$vo['recommend_ad_slide']['ap_width']}">
+										</a>
+									</li>
+									{/volist}
+								</ul>
+							</div>
+						</div>
+					</div>
+					{/if}
+					<div class="floor-right"
+						{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+							style="width: 1210px;" 		
+						{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+							style="width: 816px" 
+						{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+							style="width: 998px;" 
+						{/if}
+					>
+						<!-- 幻灯片广告 _start -->
+						{if condition="$vo['base_info']['recommend_ad_images'] neq 0"}
+							{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+								<div class="floor-tabs-panel" style="width: 1210px;">
+									<div class="floor-tabs-ad-up" style="width: 1212px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="0" length='6'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first">
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+									<div class="floor-tabs-ad-down" style="width: 1212px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="6" length='4'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first"> 
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+								</div>	
+							{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+								<div class="floor-tabs-panel">
+									<div class="floor-tabs-ad-up" style="width: 868px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="0" length='4'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first">
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+									<div class="floor-tabs-ad-down" style="width: 868px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="4" length='2'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first" style="width: 404px;"> 
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+								</div>
+							{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+								<div class="floor-tabs-panel" style="width: 998px;">
+									<div class="floor-tabs-ad-up" style="width: 1010px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="0" length='5'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first">
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+									<div class="floor-tabs-ad-down" style="width: 1010px;">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="5" length='3'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first"> 
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+								</div>
+							{else/}
+								<div class="floor-tabs-panel">
+									<div class="floor-tabs-ad-up">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="0" length='3'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first">
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+									<div class="floor-tabs-ad-down">
+									{volist name="vo['recommend_ad_images']['adv_list']" id="volc" offset="3" length='2'}
+										<a href="{$volc['adv_url']}" target="_blank" class="floor-tabs-ad-img first"> 
+											<img class="lazy" src="__UPLOAD__/{$volc['adv_image']}">
+										</a>
+									{/volist}
+									</div>
+								</div>
+							{/if}
+						{/if}
+						<!-- 幻灯片广告 _end -->
+						{if condition="$vo['base_info']['recommend_ad_images'] neq 0"}
+						<div class="floor-tabs-panel floor-tabs-hide"
+							{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 1212px;" 		
+							{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 816px;margin-left: 10px;" 
+							{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+								style="width: 1010px;" 
+							{/if}
+						>
+						{else/}
+						<div class="floor-tabs-panel"
+							{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 1212px;" 		
+							{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 816px;margin-left: 10px;" 
+							{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+								style="width: 1010px;" 
+							{/if}
+						>
+						{/if}
+						{volist name="vo['goods_list_1']" id="good"}
+							<div class="item">
+								<div class="wrap">
+									<a target="_blank" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">
+										<img class="lazy" src="__UPLOAD__/{$good['picture_detail']['pic_cover_big']}" />
+									</a>
+									<p class="title">
+										<a target="_blank" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">{$good['goods_name']}</a>
+									</p>
+									<p class="price">
+										<span class="second-color">￥{$good['promotion_price']}</span>
+									</p>
+									<!-- <a class="add-cart" title="加入购物车"></a> -->
+								</div>
+							</div>
+						{/volist}
+						</div>
+						
+						<div class="floor-tabs-panel floor-tabs-hide"
+							{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 1212px;" 		
+							{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 816px;margin-left: 10px;" 
+							{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+								style="width: 1010px;" 
+							{/if}
+						>
+						{volist name="vo['goods_list_2']" id="good"}
+							<div class="item">
+								<div class="wrap">
+									<a target="_blank"href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">
+										<img class="lazy" src="__UPLOAD__/{$good['picture_detail']['pic_cover_big']}" >
+									</a>
+									<p class="title">
+										<a target="_blank" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">{$good['goods_name']}</a>
+									</p>
+									<p class="price">
+										<span class="second-color">￥{$good['promotion_price']}</span>
+									</p>
+									<!-- <a class="add-cart" title="加入购物车"></a> -->
+								</div>
+							</div>
+						{/volist}
+						</div>
+
+						<div class="floor-tabs-panel floor-tabs-hide"
+							{if condition="$vo['base_info']['recommend_ad_slide'] eq 0  && 	$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 1212px;" 		
+							{elseif condition="$vo['base_info']['recommend_ad_image'] eq 0"}
+								style="width: 816px;margin-left: 10px;" 
+							{elseif condition="$vo['base_info']['recommend_ad_slide'] eq 0"}
+								style="width: 1010px;" 
+							{/if}
+						>
+
+						{volist name="vo['goods_list_3']" id="good"}
+							<div class="item">
+								<div class="wrap">
+									<a target="_blank" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">
+										<img class="lazy" src="__UPLOAD__/{$good['picture_detail']['pic_cover_big']}" />
+									</a>
+									<p class="title">
+										<a target="_blank" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$good['goods_id'])}" title="{$good['goods_name']}">{$good['goods_name']}</a>
+									</p>
+									<p class="price">
+										<span class="second-color">￥{$good['promotion_price']}</span>
+									</p>
+									<!-- <a class="add-cart" title="加入购物车"></a> -->
+								</div>
+							</div>
+						{/volist}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{if condition="count($vo['brand_list'])"}
+<!-- 楼层 _end -->
+<div class="w1210">
+	<div class="floors-brand">
+		<div class="floor-layout">
+			<div class="floor-con">
+				<div class="floor-brand">
+					<div class="tabs-brand">
+						<div class="brand">
+							<div class="brand-con">
+								<ul class="brand-list" style="position: absolute;height: 40px;top:0;left:0;">
+									{volist name="vo['brand_list']" id="item"}
+									<li class="fore1">
+										<a href="{:__URL('SHOP_MAIN/goods/goodslist','brand_id='.$item['brand_id'])}" target="_blank" title="{$item['brand_name']}">
+											<img class="lazy" src="__UPLOAD__/{$item['brand_pic']}" />
+										</a>
+									</li>
+									{/volist}
+								</ul>
+								<div class="brand-btn">
+									<a class="brand-left" href="javascript:void(0)">&lt;</a>
+									<a class="brand-right" href="javascript:void(0)">&gt;</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/if}
+{/volist}

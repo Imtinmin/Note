@@ -1,0 +1,4 @@
+/*可以在这里添加你自己的css*/
+body{font-family:'宋体';font-size:13px;}
+.view{font-size: 14px !important; line-height: 1.78571429 !important;}
+p{line-height: inherit !important;}

@@ -1,0 +1,18 @@
+{extend name="shop/default/Cms/base" /}
+{block name="resources"}
+{/block}
+{block name="main"}
+<div class="content w990 clearfix">
+	{include file='shop/default/Cms/controlLeftMenu'/}
+	<!-- 右半部分内容 -->
+	<div class="fr" id="question">
+		<div class="right-inner">
+			<h3 class="help-tit">{$info['title']}</h3>
+			<div class="help-detail">
+				<p style="color: #666666;">{$info['content']}</p>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="javascript"}{/block}

@@ -1,0 +1,365 @@
+{extend name="shop/default/Login/registerBase"}
+{block name="main"}
+<script>
+$(document).ready(function(){
+	$("#emailregistermodel-email").change(function(){
+		if(!($(this).val().search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1)){	
+			$('#emailregistermodel-email').css("border","1px solid #ccc");
+			$("#emailyz").css("color","red").text("");
+			$("#isset_email").attr("value","1");
+			var user_email = $(this).val();
+			$.ajax({
+				type: "GET",
+				url: "{:__URL('SHOP_MAIN/login/email')}",
+				data: {"email":user_email},
+				success: function(data){
+					if(data){
+						$('#emailregistermodel-email').css("border","1px solid red");
+						$("#emailyz").css("color","red").text("该邮箱已被注册");
+						$("#isset_email").attr("value","2");
+					}
+				} 
+			});
+		}
+	});
+	$("#btn_submit").click(function(){
+		var email = $("#emailregistermodel-email").val();
+		var password = $("#password").val();
+		var repass = $("#repass").val();
+		var isset_email = $("#isset_email").attr("value");
+		var code =$("#emailregistermodel-email_captcha").val();
+		var vertification = $("#captcha").val();
+		var agree=$('input[name=remember]').is(':checked')?'1':'0';
+		if(email.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1){
+ 			$("#emailregistermodel-email").trigger("focus");
+ 			$('#emailregistermodel-email').css("border","1px solid red");
+			$("#emailyz").css("color","red").text("请输入正确的邮箱格式");
+			return false;
+		}else{
+			$('#emailregistermodel-email').css("border","1px solid #ccc");
+			$("#emailyz").css("color","red").text("");
+		}
+ 		
+ 		if(isset_email == "2"){
+ 			$('#emailregistermodel-email').css("border","1px solid red");
+			$("#emailyz").css("color","red").text("该邮箱已被注册");
+			$("#emailregistermodel-email").trigger("focus");
+			return false;
+ 		}else{
+			$('#emailregistermodel-email').css("border","1px solid #ccc");
+			$("#emailyz").css("color","red").text("");
+		}
+ 		/* if(!( password.length >=6 && password.length <=16)){
+			$("#isset_email").attr("value","不存在");
+			$("#password").trigger("focus");
+			$("#password").css("border","1px solid red");
+			$("#yzpassword").css("color","red").text("密码为6到16位");
+			$('#emailregistermodel-email').css("border","1px solid #ccc");
+			$("#emailyz").css("color","red").text("");
+			return false;
+		} */
+ 		//后台设置注册验证
+ 		var is_password_true = verifyPassword(password);
+		if(is_password_true > 0){
+			return false;
+		}
+		if( !(repass == password)){
+			$("#repass").trigger("focus");
+			$("#repass").css("border","1px solid red");
+			$("#qrrepass").css("color","red").text("两次输入不一致");
+			$("#password").css("border","1px solid #ccc");
+			$("#yzpassword").css("color","red").text("");
+			return false;
+		}else{
+			$('#repass').css("border","1px solid #ccc");
+			$("#qrrepass").css("color","red").text("");
+		}
+		//如果前台验证码为开启状态时执行
+		{if condition = "$login_verify_code['pc'] == 1"}
+		if(vertification == ''){
+			$("#captcha").trigger("focus");
+			$("#captcha").css("border","1px solid red");
+			$("#yzpassword").text("");
+			$("#password").css("border","1px solid #ccc");
+			$("#qrrepass").text("");
+			$("#repass").css("border","1px solid #ccc");
+			$("#vertify").css("color","red").text("请输入验证码");
+			return false;
+		}
+		var vertification = $("#captcha").val();
+		var result = '';
+		$.ajax({
+			type:"post",
+			url:"{:__URL('SHOP_MAIN/login/vertify')}",
+			data:{'vertification':vertification},
+			async : false,
+			dataType:'json',
+			success:function(data){
+				if (data['code'] == 1) {
+					$("#vertify").text("");
+					$("#captcha").css("border","1px solid #ccc");
+					result = true;
+				}else {
+					$("#vertify").css("color","red").text("验证码错误");
+					$(".verifyimg").attr("src",'{:captcha_src()}');
+					result = false;
+				}
+				return result;
+			}
+		}); 
+		if(!result){
+			return false;
+		}
+		{/if}
+		{if condition="$notice['noticeEmail'] eq 1"}
+			if(code.length != 6){
+				$("#emailregistermodel-email_captcha").trigger("change");
+				$("#emailregistermodel-email_captcha").css("border","1px solid red");
+				$("#qryzm").css("color","red").text("邮箱校验码错误");
+				$("#repass").css("border","1px solid #ccc");
+				$("#qrrepass").css("color","red").text("");
+				return false;
+			}
+			var res = '';
+			$.ajax({
+				type:"post",
+				url:"{:__URL('SHOP_MAIN/login/check_code')}",
+				data:{'send_param':code},
+				async : false,
+				dataType:'json',
+				success:function(data){
+				if (data['code'] == 0) {
+						res=false;
+					}else {
+						$("#qryzm").css("color","red").text("邮箱验证码错误");
+						res = true;
+					}
+					return res;
+			}
+			}); 
+			if(res){
+				return false;
+			}
+		{/if}
+		
+		if(agree == '0'){
+			$("#is_agree").css("color","red").text("需同意用户注册协议");
+			return false;
+		}else{
+			$("#is_agree").css("color","red").text("");
+		}
+		$("#EmailRegisterModel").submit();
+	});
+
+	//发送邮箱校验码----start----
+	$("#sendOutCode").click(function (){
+		var email = $("#emailregistermodel-email").val();
+		//验证邮箱格式是否正确
+		if(email.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/) == -1){
+				$("#emailregistermodel-email").trigger("focus");
+				$('#emailregistermodel-email').css("border","1px solid red");
+				$("#emailyz").css("color","red").text("请输入正确的邮箱格式");
+			return false;
+		}
+		//验证手机号是否已经注册
+		$.ajax({
+			type: "GET",
+			url: "{:__URL('SHOP_MAIN/login/email')}",
+			data: {"email":email},
+			async: false,
+			success: function(data){
+				if(data){
+					$('#emailregistermodel-email').css("border","1px solid red");
+					$("#emailyz").css("color","red").text("该邮箱号已被注册");
+					$("#isset_email").attr("value","存在");
+					return false;
+				}else{
+			 		//判断输入的验证码是否正确 
+					$.ajax({
+						type: "POST",
+						url: "{:__URL('SHOP_MAIN/login/sendemailcode')}",
+						data: {"email":email,"vertification":""},
+						success: function(data){
+							// alert(JSON.stringify(data));
+							if(data['code']=='0'){
+								$("#emailyz").css("color","red").text("发送成功");
+								time();
+							}else{
+								layer.msg(data["message"]);
+// 								$(".verifyimg").attr("src",'{:captcha_src()}');
+								return false;
+							}
+						}
+					});
+				}
+			} 
+		});
+	});
+	//发送邮箱验证码---end---
+
+});
+
+var wait=120; 
+function time() {
+	if (wait == 0) {
+	$("#sendOutCode").removeAttr("disabled");
+	$("#sendOutCode").val("获取验证码"); 
+	wait = 120;
+	} else {
+		$("#sendOutCode").attr("disabled", 'disabled');
+		$("#sendOutCode").val(wait+"s后重新发送");
+		wait--;
+		setTimeout(function() {
+			time();
+		},1000);
+	}
+}
+</script>
+<!-- 红包消息 -->
+<input type="hidden" value="不存在" id="isset_email"/>
+	<div class="header w990">
+		<div class="logo-info">
+			<a href="{:__URL('SHOP_MAIN')}" class="logo">
+				<img alt="" src="__UPLOAD__/{$web_info['logo']}" class="web-logo"/>
+			</a>
+			<span class="findpw">欢迎注册</span>
+		</div>
+	</div>
+	<div class="reg-content">
+		<div class="w990">
+<div class="reg-form">
+	<div class="reg-con">
+		{include file='shop/default/loginTopNav'/}
+		<div class="reg-wrap">
+			<div class="reg-wrap-con" style="background: url(__TEMP__/{$style}/public/images/register_bg_image.png) no-repeat right 70px;">
+				<!-- 邮箱注册 star -->
+				<form id="EmailRegisterModel" class="form-horizontal" name="EmailRegisterModel" action="{:__URL('SHOP_MAIN/login/email')}" method="post">
+				<input type="hidden" name="_csrf" value="Q2dXM2NPVXYbFDZYMT0TNycsLkklHQ1HAQsGAA5/OjAaHxtUG3s7Dg==">
+				<!-- 邮箱 -->
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-email" class="input-left">
+					<span class="spark">*</span>
+					<span>邮箱：</span>
+					</label>
+					<div class="form-control-box">	
+				<input type="email" id="emailregistermodel-email" class="form-control" name="email" placeholder="请输入您的邮箱地址" />
+				<span id="emailyz"></span>
+				</div>
+					<div class="invalid"></div>
+				</div>
+				<input style="display: none">
+				<!-- 密码 -->
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-password" class="input-left">
+					<span class="spark">*</span>
+					<span>密码：</span>
+					</label>
+					<div class="form-control-box">
+					<input type="password" id="password" class="form-control" name="password" autocomplete="off" placeholder="请输入密码">
+					<!--  <i class="fa fa-eye-slash pwd-toggle" data-id="password"></i>	-->	
+					<span id="yzpassword"></span>
+					</div>
+					<div class="invalid"></div>
+				</div>
+				<!-- 密码 -->
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-password" class="input-left">
+					<span class="spark">*</span>
+					<span>确认密码：</span>
+					</label>
+					<div class="form-control-box">
+					<input type="password" id="repass" class="form-control" name="qrpassword" autocomplete="off" placeholder="请确认输入密码">
+					<!--  <i class="fa fa-eye-slash pwd-toggle" data-id="password"></i>	-->	
+					<span id="qrrepass"></span>
+					</div>
+					<div class="invalid"></div>
+				</div>
+				<!-- 验证码 
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-captcha" class="input-left">
+					<span>验证码：</span>
+					</label>
+					<div class="form-control-box">
+					<input type="text" id="captcha" class="input-small" name="EmailRegisterModel[captcha]">
+					<label class="captcha">
+					<img id="captcha-image" class="captcha-image" src="/site/captcha?v=58982c7be3851" alt="点击换图" title="点击换图" style="vertical-align: middle; cursor: pointer;"><script data-captcha-id='captcha-image' type='text'>{"refreshUrl":"\/site\/captcha?refresh=1","hashKey":"niiCaptcha\/site\/captcha"}</script>
+					</label>		
+					</div>
+					<div class="invalid"></div>
+				</div>
+				--><!-- 邮箱校验码 -->
+				{if condition = "$login_verify_code['pc'] == 1"}
+				<div class="form-group form-group-spe">
+				<label for="mobileregistermodel-captcha" class="input-left">
+					<span>验证码：</span>
+					</label>
+				
+					<div class="form-control-box" style="width: 450px;">
+						<input type="text" id="captcha" name="captcha" tabindex="2" placeholder="请输入验证码" autocomplete="off" class="text text-te" style="width: 100px;"/>
+						<label class="img" style="margin-left: 5px"> <img class="verifyimg" src=" {:captcha_src()}" onclick="this.src='{:captcha_src()}'"  alt="captcha" style="vertical-align: middle; cursor: pointer; height: 35px;" /> </label>
+						<span id="vertify" style="margin-left: 25px;"></span>
+					</div>
+				
+				</div>
+				{/if}
+				{if condition="$notice['noticeEmail'] eq 1"}
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-email_captcha" class="input-left">
+					<span class="spark">*</span>
+					<span>邮箱校验码：</span>
+					</label>
+					<div class="form-control-box">
+					<input type="text" id="emailregistermodel-email_captcha" class="input-small" name="email_code" >
+				<!-- 	<a href="javascript:void(0);" class="phonecode" id="sendOutCode" name="code_email">获取邮箱校验码</a> -->
+					<input type="button" class="phonecode" id="sendOutCode" name="code_email" value="获取邮箱校验码">
+					<span id="qryzm"></span>
+					</div>
+					<div class="invalid"></div>
+				</div>
+				{/if}
+				<!-- 注册邀请码 
+				<div class="form-group form-group-spe">
+					<label for="emailregistermodel-invite_code" class="input-left">
+					<span>注册邀请码：</span>
+					</label>
+					<div class="form-control-box">
+			  	<input type="text" id="emailregistermodel-invite_code" class="input-small" name="EmailRegisterModel[invite_code]">
+					</div>
+					<div class="invalid"></div>
+				</div>
+				-->
+				<div class="form-group m-10">
+					<label class="input-left">&nbsp;</label>
+					<div class="form-control-box">
+						<label for="remember1">
+							<input type="checkbox" name="remember" id="remember1" class="checkbox m-b-6"  />
+							<span>
+								我已阅读并同意
+								<a href="{:__URL('SHOP_MAIN/helpcenter/index','id=17&class_id=6')}" class="user_protocol" target="_blank">《用户注册协议》</a>
+							</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<span id="is_agree" ></span>
+						</label>
+					</div>
+				</div>
+				<div class="reg-btn">
+					<div class="form-group form-group-spe">
+					<label for="" class="input-left">
+					</label>
+					<div class="form-control-box">
+				  	<input type="button" class="btn-img btn-entry bg-color" id="btn_submit" name="btn_submit" value="同意协议并注册">
+					</div>
+					<div class="invalid"></div>
+					</div>
+				</div>
+				</form>
+				<!-- 手机注册 end -->
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+	</div>
+{/block}
+{/extend}
+	

@@ -1,0 +1,592 @@
+[ 2018-09-04T11:34:04+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.004283s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007504s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005958s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000268s ]
+
+[ 2018-09-04T11:34:05+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000967s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001054s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005891s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admintest' ) LIMIT 1   [ RunTime:0.000399s ]
+
+[ 2018-09-04T11:34:06+08:00 ] 10.111.0.179 /index.php
+SQL: SHOW COLUMNS FROM `onethink_category` [ RunTime:0.006496s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000686s ]
+SQL: SHOW COLUMNS FROM `onethink_document` [ RunTime:0.006336s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1536032045 ) AND ( deadline = 0 OR deadline > 1536032045 ) ORDER BY `id` DESC  [ RunTime:0.000410s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000176s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005701s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000400s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000443s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000321s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000035s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.028711s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.011134s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011191s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.003956s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004002s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000127s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000102s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1536032045 ) AND ( deadline = 0 OR deadline > 1536032045 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000292s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.016716s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011191s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000008s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.001564s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.004032s ]
+INFO: [ app_end ] --END-- [ RunTime:0.004103s ]
+
+[ 2018-09-04T11:34:07+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000085s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.024190s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025971s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.002613s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002654s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.002719s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002766s ]
+
+[ 2018-09-04T11:34:07+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000103s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005596s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000096s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.058813s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058892s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000974s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001016s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000929s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000978s ]
+
+[ 2018-09-04T11:34:08+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006424s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'dlIKNRVI' ) LIMIT 1   [ RunTime:0.000267s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `email` = 'dlIKNRVI@1.com' ) LIMIT 1   [ RunTime:0.000194s ]
+SQL: INSERT INTO `onethink_ucenter_member` (`username`,`password`,`email`,`reg_time`,`reg_ip`,`update_time`,`status`) VALUES ('dlIKNRVI','38042bdab2584a6d582f0a248cd6b6ef','dlIKNRVI@1.com',1536032047,'175046835',1536032047,1) [ RunTime:0.000627s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000046s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000129s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.018724s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018791s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000872s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000911s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000915s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000955s ]
+
+[ 2018-09-04T11:34:08+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000090s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000175s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005939s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000156s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.055117s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.055187s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001077s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001118s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000946s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000989s ]
+
+[ 2018-09-04T11:34:08+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.008327s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'dlIKNRVI' ) LIMIT 1   [ RunTime:0.000481s ]
+SQL: UPDATE `onethink_ucenter_member` SET `last_login_time`=1536032048,`last_login_ip`='175046835' WHERE ( `id` = 3 ) [ RunTime:0.000926s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.006541s ]
+SQL: SELECT `uid`,`nickname`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status` FROM `onethink_member` WHERE ( `uid` = 3 ) LIMIT 1   [ RunTime:0.000377s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006196s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000337s ]
+SQL: INSERT INTO `onethink_member` (`nickname`,`status`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`uid`) VALUES ('dlIKNRVI',1,0,'175046835',1536032048,0,0,3) [ RunTime:0.000492s ]
+SQL: UPDATE `onethink_member` SET `login`=`login`+1,`last_login_time`=1536032048,`last_login_ip`='175046835' WHERE ( `uid` = 3 ) [ RunTime:0.000432s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006480s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000128s ]
+SQL: SHOW COLUMNS FROM `onethink_action` [ RunTime:0.007458s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000388s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.006957s ]
+SQL: SELECT `nickname` FROM `onethink_member` WHERE ( `uid` = 3 ) LIMIT 1   [ RunTime:0.000350s ]
+SQL: SHOW COLUMNS FROM `onethink_action_log` [ RunTime:0.005848s ]
+SQL: INSERT INTO `onethink_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES (1,3,175046835,'member',3,1536032048,'dlIKNRVI在2018-09-04 11:34登录了后台') [ RunTime:0.000627s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000135s ]
+NOTIC: [8] Undefined offset: 1 /var/www/html/Application/Common/Common/function.php 第 665 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given /var/www/html/Application/Common/Common/function.php 第 665 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_action_log` WHERE ( `action_id` = 1 ) AND ( `user_id` = 3 ) AND ( `create_time` > 1535945648 ) LIMIT 1   [ RunTime:0.000375s ]
+SQL: UPDATE `onethink_member` SET `score`=score+10 WHERE ( uid=3 AND status>-1 ) [ RunTime:0.000506s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000048s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000108s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.016180s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016256s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000958s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000997s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000966s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001008s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.003305s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005143s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006504s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000291s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000952s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001037s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006040s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admintest' ) LIMIT 1   [ RunTime:0.000405s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php
+SQL: SHOW COLUMNS FROM `onethink_category` [ RunTime:0.007048s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000188s ]
+SQL: SHOW COLUMNS FROM `onethink_document` [ RunTime:0.006301s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1536036679 ) AND ( deadline = 0 OR deadline > 1536036679 ) ORDER BY `id` DESC  [ RunTime:0.000357s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000109s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000166s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005635s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000118s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000113s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000088s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.024915s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.010349s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010403s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.003178s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003222s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000133s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000086s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1536036679 ) AND ( deadline = 0 OR deadline > 1536036679 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000298s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014943s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010403s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000008s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.001361s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.002488s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002543s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000117s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.012498s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012580s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000890s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000929s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000861s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000902s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000094s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000169s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.006009s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000157s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.058502s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058574s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001068s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001111s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000998s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001048s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005880s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'xW9snOmq' ) LIMIT 1   [ RunTime:0.000272s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `email` = 'xW9snOmq@1.com' ) LIMIT 1   [ RunTime:0.000213s ]
+SQL: INSERT INTO `onethink_ucenter_member` (`username`,`password`,`email`,`reg_time`,`reg_ip`,`update_time`,`status`) VALUES ('xW9snOmq','38042bdab2584a6d582f0a248cd6b6ef','xW9snOmq@1.com',1536036679,'175046835',1536036679,1) [ RunTime:0.000573s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015530s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015594s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001172s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001216s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000963s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001006s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000164s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005820s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000143s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.055160s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.055231s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001062s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001105s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000970s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001015s ]
+
+[ 2018-09-04T12:51:19+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006079s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'xW9snOmq' ) LIMIT 1   [ RunTime:0.000437s ]
+SQL: UPDATE `onethink_ucenter_member` SET `last_login_time`=1536036679,`last_login_ip`='175046835' WHERE ( `id` = 4 ) [ RunTime:0.000483s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005938s ]
+SQL: SELECT `uid`,`nickname`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status` FROM `onethink_member` WHERE ( `uid` = 4 ) LIMIT 1   [ RunTime:0.000237s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005815s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000367s ]
+SQL: INSERT INTO `onethink_member` (`nickname`,`status`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`uid`) VALUES ('xW9snOmq',1,0,'175046835',1536036679,0,0,4) [ RunTime:0.000557s ]
+SQL: UPDATE `onethink_member` SET `login`=`login`+1,`last_login_time`=1536036679,`last_login_ip`='175046835' WHERE ( `uid` = 4 ) [ RunTime:0.000463s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006424s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 4 ) LIMIT 1   [ RunTime:0.000167s ]
+SQL: SHOW COLUMNS FROM `onethink_action` [ RunTime:0.005778s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000130s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005730s ]
+SQL: SELECT `nickname` FROM `onethink_member` WHERE ( `uid` = 4 ) LIMIT 1   [ RunTime:0.000438s ]
+SQL: SHOW COLUMNS FROM `onethink_action_log` [ RunTime:0.005633s ]
+SQL: INSERT INTO `onethink_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES (1,4,175046835,'member',4,1536036679,'xW9snOmq在2018-09-04 12:51登录了后台') [ RunTime:0.000587s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000133s ]
+NOTIC: [8] Undefined offset: 1 /var/www/html/Application/Common/Common/function.php 第 665 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given /var/www/html/Application/Common/Common/function.php 第 665 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_action_log` WHERE ( `action_id` = 1 ) AND ( `user_id` = 4 ) AND ( `create_time` > 1535950279 ) LIMIT 1   [ RunTime:0.000667s ]
+SQL: UPDATE `onethink_member` SET `score`=score+10 WHERE ( uid=4 AND status>-1 ) [ RunTime:0.000472s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000048s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000109s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015447s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015509s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000956s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000995s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001150s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001193s ]
+
+[ 2018-09-04T13:33:04+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.002519s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004244s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.007493s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000231s ]
+
+[ 2018-09-04T13:33:04+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000879s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000952s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005745s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admintest' ) LIMIT 1   [ RunTime:0.000404s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php
+SQL: SHOW COLUMNS FROM `onethink_category` [ RunTime:0.006192s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000181s ]
+SQL: SHOW COLUMNS FROM `onethink_document` [ RunTime:0.006029s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1536039184 ) AND ( deadline = 0 OR deadline > 1536039184 ) ORDER BY `id` DESC  [ RunTime:0.000329s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000117s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000176s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005629s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000148s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000125s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000118s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000034s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.025527s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.011428s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011483s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.003241s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003284s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000137s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000117s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1536039184 ) AND ( deadline = 0 OR deadline > 1536039184 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000336s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.016171s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011483s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000009s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.001443s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.002740s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002784s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000079s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000156s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.016791s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016876s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001136s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001182s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001606s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001655s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000146s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005670s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000140s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.052327s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.052402s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001072s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001115s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001016s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001066s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005659s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'mKxxKbYr' ) LIMIT 1   [ RunTime:0.000268s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `email` = 'mKxxKbYr@1.com' ) LIMIT 1   [ RunTime:0.000224s ]
+SQL: INSERT INTO `onethink_ucenter_member` (`username`,`password`,`email`,`reg_time`,`reg_ip`,`update_time`,`status`) VALUES ('mKxxKbYr','38042bdab2584a6d582f0a248cd6b6ef','mKxxKbYr@1.com',1536039185,'175046835',1536039185,1) [ RunTime:0.000560s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000090s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014883s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014941s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000912s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000963s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000878s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000942s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000086s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000141s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005558s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000094s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.051213s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.051281s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000910s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000950s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000853s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000929s ]
+
+[ 2018-09-04T13:33:05+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005678s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'mKxxKbYr' ) LIMIT 1   [ RunTime:0.000327s ]
+SQL: UPDATE `onethink_ucenter_member` SET `last_login_time`=1536039185,`last_login_ip`='175046835' WHERE ( `id` = 5 ) [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005639s ]
+SQL: SELECT `uid`,`nickname`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status` FROM `onethink_member` WHERE ( `uid` = 5 ) LIMIT 1   [ RunTime:0.000222s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005570s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000295s ]
+SQL: INSERT INTO `onethink_member` (`nickname`,`status`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`uid`) VALUES ('mKxxKbYr',1,0,'175046835',1536039185,0,0,5) [ RunTime:0.000447s ]
+SQL: UPDATE `onethink_member` SET `login`=`login`+1,`last_login_time`=1536039185,`last_login_ip`='175046835' WHERE ( `uid` = 5 ) [ RunTime:0.000331s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005671s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 5 ) LIMIT 1   [ RunTime:0.000095s ]
+SQL: SHOW COLUMNS FROM `onethink_action` [ RunTime:0.005662s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000098s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005703s ]
+SQL: SELECT `nickname` FROM `onethink_member` WHERE ( `uid` = 5 ) LIMIT 1   [ RunTime:0.000316s ]
+SQL: SHOW COLUMNS FROM `onethink_action_log` [ RunTime:0.006094s ]
+SQL: INSERT INTO `onethink_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES (1,5,175046835,'member',5,1536039185,'mKxxKbYr在2018-09-04 13:33登录了后台') [ RunTime:0.000500s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000091s ]
+NOTIC: [8] Undefined offset: 1 /var/www/html/Application/Common/Common/function.php 第 665 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given /var/www/html/Application/Common/Common/function.php 第 665 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_action_log` WHERE ( `action_id` = 1 ) AND ( `user_id` = 5 ) AND ( `create_time` > 1535952785 ) LIMIT 1   [ RunTime:0.000363s ]
+SQL: UPDATE `onethink_member` SET `score`=score+10 WHERE ( uid=5 AND status>-1 ) [ RunTime:0.000405s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000114s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.015754s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015840s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000950s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000991s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000904s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000950s ]
+
+[ 2018-09-04T13:38:03+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.002606s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004432s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006068s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000294s ]
+
+[ 2018-09-04T13:38:03+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000988s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001085s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005823s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admintest' ) LIMIT 1   [ RunTime:0.000398s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php
+SQL: SHOW COLUMNS FROM `onethink_category` [ RunTime:0.006401s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000181s ]
+SQL: SHOW COLUMNS FROM `onethink_document` [ RunTime:0.006289s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `create_time` < 1536039483 ) AND ( deadline = 0 OR deadline > 1536039483 ) ORDER BY `id` DESC  [ RunTime:0.000378s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000106s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000168s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.006006s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000137s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000128s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000124s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000037s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.027080s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.011715s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011771s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.003584s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003625s ]
+SQL: SELECT `id`,`name`,`title`,`pid`,`sort`,`list_row`,`meta_title`,`keywords`,`description`,`template_index`,`template_lists`,`template_detail`,`template_edit`,`model`,`type`,`link_id`,`allow_publish`,`display`,`reply`,`check`,`reply_model`,`extend`,`create_time`,`update_time`,`status`,`icon` FROM `onethink_category` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000125s ]
+SQL: SELECT `id`,`name`,`pid`,`title`,`link_id` FROM `onethink_category` WHERE ( `status` = 1 ) ORDER BY sort  [ RunTime:0.000117s ]
+SQL: SELECT `id`,`uid`,`name`,`title`,`category_id`,`description`,`root`,`pid`,`model_id`,`type`,`position`,`link_id`,`cover_id`,`display`,`deadline`,`attach`,`view`,`comment`,`extend`,`level`,`create_time`,`update_time`,`status` FROM `onethink_document` WHERE ( `status` = 1 ) AND ( `pid` = 0 ) AND ( `category_id` = 2 ) AND ( `create_time` < 1536039483 ) AND ( deadline = 0 OR deadline > 1536039483 ) ORDER BY `level` DESC,`id` DESC LIMIT 0,10   [ RunTime:0.000367s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.016874s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011771s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000008s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.001520s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.003443s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003498s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php?s=/Admin/Public/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000073s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000134s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014179s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014272s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.003497s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003560s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001289s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001378s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000092s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000151s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005730s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000104s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.053005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053075s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000933s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000976s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000893s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000947s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php?s=/Home/User/register.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005616s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = '9UIJFxlp' ) LIMIT 1   [ RunTime:0.000241s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `email` = '9UIJFxlp@1.com' ) LIMIT 1   [ RunTime:0.000194s ]
+SQL: INSERT INTO `onethink_ucenter_member` (`username`,`password`,`email`,`reg_time`,`reg_ip`,`update_time`,`status`) VALUES ('9UIJFxlp','38042bdab2584a6d582f0a248cd6b6ef','9UIJFxlp@1.com',1536039484,'175046835',1536039484,1) [ RunTime:0.000520s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000043s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000107s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014583s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014702s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000857s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000899s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000883s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000925s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000088s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000147s ]
+SQL: SHOW COLUMNS FROM `onethink_channel` [ RunTime:0.005656s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`sort`,`create_time`,`update_time`,`status`,`target` FROM `onethink_channel` WHERE ( status=1 ) ORDER BY sort  [ RunTime:0.000156s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.057099s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.057172s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001218s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001263s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001035s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001077s ]
+
+[ 2018-09-04T13:38:04+08:00 ] 10.111.0.179 /index.php?s=/Home/User/login.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006195s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = '9UIJFxlp' ) LIMIT 1   [ RunTime:0.000398s ]
+SQL: UPDATE `onethink_ucenter_member` SET `last_login_time`=1536039484,`last_login_ip`='175046835' WHERE ( `id` = 6 ) [ RunTime:0.000420s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005809s ]
+SQL: SELECT `uid`,`nickname`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status` FROM `onethink_member` WHERE ( `uid` = 6 ) LIMIT 1   [ RunTime:0.000273s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.005837s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000307s ]
+SQL: INSERT INTO `onethink_member` (`nickname`,`status`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`uid`) VALUES ('9UIJFxlp',1,0,'175046835',1536039484,0,0,6) [ RunTime:0.000462s ]
+SQL: UPDATE `onethink_member` SET `login`=`login`+1,`last_login_time`=1536039484,`last_login_ip`='175046835' WHERE ( `uid` = 6 ) [ RunTime:0.000428s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.006011s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 6 ) LIMIT 1   [ RunTime:0.000173s ]
+SQL: SHOW COLUMNS FROM `onethink_action` [ RunTime:0.005589s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000150s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.005792s ]
+SQL: SELECT `nickname` FROM `onethink_member` WHERE ( `uid` = 6 ) LIMIT 1   [ RunTime:0.000312s ]
+SQL: SHOW COLUMNS FROM `onethink_action_log` [ RunTime:0.005626s ]
+SQL: INSERT INTO `onethink_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES (1,6,175046835,'member',6,1536039484,'9UIJFxlp在2018-09-04 13:38登录了后台') [ RunTime:0.000531s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000124s ]
+NOTIC: [8] Undefined offset: 1 /var/www/html/Application/Common/Common/function.php 第 665 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given /var/www/html/Application/Common/Common/function.php 第 665 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_action_log` WHERE ( `action_id` = 1 ) AND ( `user_id` = 6 ) AND ( `create_time` > 1535953084 ) LIMIT 1   [ RunTime:0.000385s ]
+SQL: UPDATE `onethink_member` SET `score`=score+10 WHERE ( uid=6 AND status>-1 ) [ RunTime:0.000377s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000047s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000100s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014611s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014671s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000936s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000976s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000905s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000946s ]
+

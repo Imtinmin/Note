@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NiuFrameWork</title>
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/portal.css">
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/banner.js"></script>
+<style>
+#main {
+	border: 1px solid red;
+	background: #F2F2F2;
+	height: 1000px;
+}
+
+#main div {
+	width: 1200px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+#main div aside {
+	float: left;
+	height: 100%;
+	width: 30%;
+}
+
+#main div article {
+	height: 100%;
+	border: 1px solid blue;
+	float: left;
+	width: 60%;
+}
+
+.main-section-one, .main-section-two {
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 3px 3px 5px #DFDFDF;
+	margin: 20px 10px;
+	padding: 10px;
+}
+
+.main-section-one h3, .main-section-two h3 {
+	margin: 15px 0;
+	font-weight: 400;
+	font-size: 18px;
+	color: #000;
+}
+
+.main-section-two ul li, .main-section-one ul li {
+	list-style: none;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.main-section-two ul li span, .main-section-one ul li span {
+	color: #14A12E;
+	margin-right: 5px;
+}
+
+.main-section-two h5, .main-section-one h5 {
+	font-weight: 400;
+	color: #14A12E;
+	font-size: 14px;
+}
+
+.main-section-one table {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.main-section-one input {
+	color: #14A131;
+	width: 83%;
+	margin: 0 20px 20px;
+	padding: 10px;
+	background: transparent;
+	border: 1px solid #14A131;
+	border-radius: 5px;
+	font-size: 18px;
+	box-shadow: 0 3px 5px #D9D9D9;
+}
+</style>
+</head>
+<body>
+	<header>
+		<img src="__TEMP__/{$style}/public/images/niuframework_logo.png" /><input type="button"
+			class="header-register" value="注册" /><input type="button" value="登录"
+			class="header-login" /> <input type="text" placeholder="请输入关键字搜索"
+			class="header-search" />
+	</header>
+	<nav>
+		<div>
+			<ul>
+				<li>首页</li>
+				<li>NiuFramWork开源框架</li>
+				<li>源码下载</li>
+				<li>版本更新</li>
+				<li>API开发手册</li>
+				<li>讨论交流</li>
+				<li>关于我们</li>
+			</ul>
+		</div>
+	</nav>
+	<section>
+		<div class="banner" style="opacity: 0.85;">
+			<ul class="banner-img">
+				<li style="display: block;"><a href="javascript:;"> <img
+						src="__TEMP__/{$style}/public/images/shuffling_1.png"
+						style="width: 100%; display: inline;">
+				</a></li>
+				<li style="display: none;"><a href="javascript:;"> <img
+						src="__TEMP__/{$style}/public/images/shuffling_1.png"
+						style="width: 100%; display: inline;">
+				</a></li>
+				<li style="display: none;"><a href="javascript:;"> <img
+						src="__TEMP__/{$style}/public/images/shuffling_1.png"
+						style="width: 100%; display: inline;">
+				</a></li>
+				<li style="display: none;"><a href="javascript:;"> <img
+						src="__TEMP__/{$style}/public/images/shuffling_1.png"
+						style="width: 100%; display: inline;">
+				</a></li>
+				<li style="display: none;"><a href="javascript:;"> <img
+						src="__TEMP__/{$style}/public/images/shuffling_1.png"
+						style="width: 100%; display: inline;">
+				</a></li>
+			</ul>
+		</div>
+		<ul class="banner-circle">
+			<li><a class=""></a> <a class="noli"></a> <a class=""></a> <a
+				class=""></a> <a class=""></a></li>
+		</ul>
+	</section>
+	<div id="main">
+		<div>
+			<aside>
+				<section class="main-section-one">
+					<h3>快捷、方便的登录版块</h3>
+					<ul>
+						<li><span>●</span>根据用户习惯设定关联登录功能</li>
+						<li><span>●</span>结合使用率较高的第三方平台</li>
+						<li><span>●</span>使用用户能快速完成操作</li>
+						<li><span>●</span>方便快捷避免用户群流失</li>
+					</ul>
+					<h5>使用以下账号可以直接登录</h5>
+					<table>
+						<tr>
+							<td><img src="__TEMP__/{$style}/public/images/temp_sina.png" /></td>
+							<td><img src="__TEMP__/{$style}/public/images/temp_wechat.png" /></td>
+							<td><img src="__TEMP__/{$style}/public/images/temp_github.png" /></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td><img src="__TEMP__/{$style}/public/images/temp_qq.png" /></td>
+							<td><img src="__TEMP__/{$style}/public/images/temp_no.png" /></td>
+							<td><img src="__TEMP__/{$style}/public/images/temp_google.png" /></td>
+						</tr>
+					</table>
+					<input type="button" value="邮箱/手机注册" />
+				</section>
+				<section class="main-section-two">
+					<h3>直观、简洁的权限管理</h3>
+					<ul>
+						<li><span>●</span>根据用户习惯设计后台的功能划分</li>
+						<li><span>●</span>采用极简扁平化界面风格</li>
+						<li><span>●</span>不需要任何培训就可以轻松上手</li>
+					</ul>
+					<h5>去体验后台&gt;</h5>
+					<img src="__TEMP__/{$style}/public/images/temp_img.png" />
+				</section>
+			</aside>
+			<article>article</article>
+		</div>
+	</div>
+	<footer>
+		<section>
+			<div>
+				<article>
+					<h1>NiuFrameWork</h1>
+					<p>一个基于PHP开发语言的二次开发开源框架</p>
+					<p>拥有九大特性,超强气场，大神都在用</p>
+					<p>使用NiuFrameWork开源框架，您可以快速完成应用系统设计开发</p>
+				</article>
+				<aside>
+					<p>
+						扫一扫<br />点关注
+					</p>
+					<img src="__TEMP__/{$style}/public/images/temp_qrcode.jpg" />
+				</aside>
+			</div>
+		</section>
+		<article>
+			<div>
+				<ul>
+					<li>首页</li>
+					<li>NiuFramWork开源框架</li>
+					<li>源码下载</li>
+					<li>版本更新</li>
+					<li>API开发手册</li>
+					<li>讨论交流</li>
+					<li>关于我们</li>
+				</ul>
+			</div>
+		</article>
+	</footer>
+</body>
+</html>

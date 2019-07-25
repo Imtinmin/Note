@@ -1,0 +1,171 @@
+{extend name="shop/default/Member/base" /}
+{block name="resources"}
+<style type="text/css">
+td{padding:10px;border: 1px Black; width:46px;}
+table{background-color:#eeeeee;border:0;width:100%;}
+.integral_title{display:block;font-size:18px;text-align:center;padding:20px;}
+.user-right .tabmenu .tab li {border-bottom: 2px #ff6600 solid;} 
+</style>
+{/block}
+{block name="main"}
+<script>
+	$(document).ready(function(){
+		var max = parseInt($("input[name='amount']").attr("max"));		//最大余额
+		var number = $("#number").text();								//可用积分
+		var yz = false;													//验证条件
+		var subscription = $("#subscription").val();					//兑换比例
+		//点击进入积分兑换
+		$("#extract").on("click",function(){
+			number = $("#sum").text();
+			$("#firstpage").hide();
+			$("#secondpage").show();
+		});
+		//点击返回余额明细界面
+		$("#extract2").on("click",function(){
+			$("#firstpage").show();
+			$("#secondpage").hide();
+			$("input[name='amount']").val("");
+		});
+		//左侧菜单栏选中效果
+		$("#qiye_point").addClass('curs');
+		//选中积分提示效果
+		$("input[name='amount']").on("keyup",function(){			
+			 var getnumber = $("input[name='amount']").val();	//输入框中输入的积分	
+			 var re = /^[0-9]*[1-9][0-9]*$/ ;  
+			 	if(subscription == 0){
+					$(this).css("border","1px solid red");
+					$("#proving").text("不可兑换余额,请修改兑换比例").css("color","red");
+					yz = false;
+				}else if(!re.test(getnumber)){
+			    	$(this).css("border","1px solid red");
+					$("#proving").text("积分必须为整数").css("color","red");
+					yz = false;
+			    }else if(getnumber.search(/[^\-?\d.]/g) == -1){
+						var stringToNumber = parseFloat(getnumber);
+						if(stringToNumber>0 && stringToNumber<=max){
+							var result = subscription*stringToNumber;
+							$(this).css("border","1px solid #ccc");
+							$("#proving").text("兑换金额为¥"+result.toFixed(2)).css("color","red");	
+							yz = true;
+						}else{
+							$(this).css("border","1px solid red");
+							$("#proving").text("最大可兑换"+number+"积分").css("color","red");
+							yz = false;
+						}	
+				}else{
+						$(this).css("border","1px solid red");
+						$("#proving").text("请输入正确的积分格式").css("color","red");
+						yz = false;
+				}  
+		});
+		$("input[name='submit']").on("click",function(){
+			if($("#hidden_account").val() == undefined || $("#hidden_account").val() == "" || parseFloat($("#hidden_account").val()) == 0){
+				$.msg("当前店铺未设置余额兑换");
+				return false;
+			}
+			if(yz){
+				$("#formsubmit").submit();
+			}else{
+				$("input[name='amount']").trigger("focus");
+				return false;
+			}
+		});
+});
+</script>
+	<input type="hidden" value="{$account}" id="subscription"/>
+    <div class="user-right" >
+    	<div class="box" id="firstpage">
+    		<div class="tabmenu">
+				<ul class="tab pngFix">
+					<li class="first active">积分明细列表</li>
+				</ul>
+			</div>
+<!--            <span class="integral_title" style="display:inline-block;"><b>{$shopname}积分操作明细(可用积分:<span id="sum">{$sum}</span>)</b></span> -->
+           	<div class="interal_table" style="height:40px;">
+                <span style="display:inline-block; float:left;font-size:16px;margin:10px;">
+                {if condition="!isset($shopname)"}
+                 	{$platform_shopname}
+                {else /}
+                	{$shopname}
+                {/if}<span style="color:#989191;">(积分:<span id="sum">{$sum}</span>)</span>
+                </span>
+                 <span style="display:inline-block; float:right;font-size:14px;margin:10px;">
+              		{if condition="$shop_id == 0"}
+              		<a class="main-color" id="extract" style="color:red;">兑换余额</a> |
+              		{/if} 
+                 <a href="{:__URL('SHOP_MAIN/member/integrallist')}" class="table_manual" style="color:#000;">我的积分</a>
+                 </span>
+            </div> 
+{if condition="$total_count neq ''"}
+		<table>
+            <tr align="center">
+              <td>类别</td>              
+              <td>数量</td>
+              <td>描述</td>
+              <td>时间</td>
+            </tr>
+            <tbody id="list_content" class="close-order">
+			   {foreach $balances.data as $balance}
+				<tr align="center">
+					<td>{$balance.type_name}</td>
+					<td>{$balance.number}</td>
+					<td>{$balance.text}</td>
+					<td>{$balance.create_time | getTimeStampTurnTime}</td>
+				</tr>
+			{/foreach}
+            </tbody>
+          
+          </table>
+  {else/}
+          <div>
+              <div class="emptyFrame"> <i class="user_point"></i><span>您暂时还没有积分哦！</span> </div>
+          </div>
+       {/if}           
+          
+            {include file='shop/default/controlCommonPage'/}
+        </div> 
+        <div class="box" id="secondpage" style="display:none;">
+        <div class="interal_table" style="height:40px;">
+                <span style="display:inline-block; float:left;font-size:16px;margin:10px;">
+                		会员积分
+                </span>
+                <span style="display:inline-block; float:right;font-size:14px;margin:10px;">
+              	<a  class="main-color" id="extract2" style="color:red;">积分明细</a> | 
+                 <a href="{:__URL('SHOP_MAIN/member/integrallist')}" class="table_manual" style="color:#000;">我的积分</a>
+                 </span>
+            </div> 
+           <form name="formSurplus" method="post" action="{:__URL('SHOP_MAIN/member/exchange')}" id="formsubmit">
+           <input type="hidden" name="shopid" value="{$shop_id}"> 
+            <table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
+              <tr>
+                <td width="10%" align="right">兑换积分数:</td>
+                <td align="left">
+                	<input type="text" name="amount" value="" class="deal" size="30" min="0" max="{$sum}" style="width:86px;border:1px solid #ccc;"/>
+                	<span style="display:inline-block;" id="proving"></span>
+                </td>
+              </tr>
+              <tr>
+                <td width="10%" align="right"><span style="display:inline-block;">可用积分为<span id="number">{$sum} </span></span></td>
+					{if condition="$account !=null && $account>0"}
+					<td align="left">兑换比例为1积分兑换{$account}元</td>
+					{else/}
+					<td align="left">当前店铺未配置积分兑换</td>
+					{/if}
+              </tr>
+              <tr>
+                <td colspan="2" align="center"><input type="hidden" name="surplus_type" value="1" />
+                  <input type="hidden" name="act" value="act_account" />
+                	{if condition="$account!=null && $account>0"}
+                  <input type="submit" name="submit"  class="main-btn main-btn-large" value="兑换" />
+					<input type="hidden" id="hidden_account" value="{$account}" />
+					{else/}
+                  <input type="submit" name="submit" class="main-btn main-btn-large" value="兑换" style="background: #BBBFC1;" disabled="disabled" />
+					{/if}
+                  </td>
+              </tr>
+            </table>
+          </form>
+		  </div>
+</div>
+
+{/block}

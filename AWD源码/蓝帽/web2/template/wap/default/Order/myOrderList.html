@@ -1,0 +1,162 @@
+{extend name="wap/default/base" /}
+{block name="resources"}
+    <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/foundation.css">
+    
+    <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/common-v4.4.css">
+	<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/person-v4.4.css">
+	<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/my_order_list.css">
+    <script src="__TEMP__/{$style}/public/js/order.js"></script>
+	<script type="text/javascript">window.onerror=function(){return true;}</script>
+	<script type="text/javascript">
+		var CONTROLLER = "APP_MAIN/orders";
+		var APP_MAIN = 'APP_MAIN';
+		function backPage(){
+			window.location.href="APP_MAIN/member/";
+		};
+		
+	</script>
+{/block}
+
+{block name="goodsHead"}
+
+{/block}
+{block name="main"}
+
+    <!--topbar end-->
+    <div class="main myorder">
+    <section class="head">
+    <a class="head_back" id="backoutapp" onclick="window.history.go(-1)"
+			href="javascript:void(0)"><i class="icon-back"></i></a>
+		<div class="head-title">我的订单</div>
+		<div class="cf-container" data-reactid="2">
+    		<div class="cf-edge" data-reactid="3"></div>
+			<ul class="cf-content" data-reactid="4">
+
+	    			<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="all"><a href="javascript:GetDataList('all');" >全部</a></li>
+	    			<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="0"><a href="javascript:GetDataList(0);" >待付款</a></li>
+					<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="1"><a href="javascript:GetDataList(1);" >待发货</a></li>
+					<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="2"><a href="javascript:GetDataList(2);" >待收货</a></li>
+					<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="3"><a href="javascript:GetDataList(3);" >已收货</a></li>
+					<li class="cf-tab-item" data-index="1" data-reactid="7" statusid="4"><a href="javascript:GetDataList(4);" >退款/售后</a></li>
+				
+	    	</ul>
+		</div>
+	</section>
+    	
+    	
+
+		<div class="tabs-content">
+			<div class="content active" id="list_content">
+			</div>
+		</div>
+        <div id="pay" style="display: none"></div>
+        
+        <input type="hidden" name="status_hidden" id="status_hidden" value="{$status}"/>
+        <input type="hidden" name="shop_id" id="shop_id" value="{$shop_id}"/>
+    </div>
+    <script>
+        $(function(){
+        	$('.cf-container .cf-tab-item').click(function(){
+        		$('.cf-container .cf-tab-item').removeClass('select');
+        		$(this).addClass('select');
+        	})
+        	/* $('.cf-container .cf-tab-item.select').focus();
+        	$(".cf-container .cf-content").animate({scrollLeft:$('.cf-container .cf-tab-item.select').offset().left},1000); */
+        	var status_hidden=$('#status_hidden').val();
+        	GetDataList(status_hidden);
+        	$('.cf-container .cf-tab-item').each(function(){
+        		if($(this).attr("statusid") == status_hidden)
+        			{
+        			$(this).addClass('select');
+        			}
+        	});
+        })
+        function GetDataList(status){
+        	$.ajax({
+        		type:'post',
+        		async:true,
+        		data:{'status':status,'shop_id':$('#shop_id').val()},
+        		dataType:'json',
+        		beforeSend:function(){
+        			showLoadMaskLayer();
+        		},
+        		success:function(data){
+        			var datahtml="";
+        			if(data.length==0){
+        				datahtml+='<div class="myorder-none" ><i class="icon-none"></i><span class="none_01">您还没有相关的订单</span><span class="none_02">去看看大家都在买什么吧</span><span class="none_03"><a href="{:__URL('APP_MAIN/goods/goodslist')}">随便逛逛</a></span></div>';
+        			
+        			}else{
+        				for(var i=0;i<data.length;i++){
+	        				var ordersitem=data[i];
+	        				datahtml+='<div class="list-myorder" style="margin-top:30px">';
+	        				datahtml+='<div class="ordernumber" style="height:auto;overflow:hidden;line-height:22px;"><span class="order-num" style="font-size: 12px;">'+ordersitem['order_no']+'</span><span class="order-date" style="font-size: 12px;">'+timeStampTurnTime(ordersitem['create_time'])+'</span></div>';
+	        				datahtml+='<ul class="ul-product">';
+	        				
+	        				for(var j=0;j<ordersitem['order_item_list'].length;j++){
+	        					
+	        					var goodsitem=ordersitem['order_item_list'][j];
+	        					datahtml+='<li><a href="'+__URL('APP_MAIN/order/orderdetail?orderId='+goodsitem['order_id'])+'">';
+	        					datahtml+='<span class="pic">';
+	        					
+	        					datahtml+='<img src="__ROOT__/'+goodsitem['picture']['pic_cover_micro']+'"></span>';
+	        					datahtml+='<div class="text">';
+	        					datahtml+='<span class="pro-name" style="font-size: 12px;">'+goodsitem['goods_name']+'</span>';
+	        					
+	        					datahtml+='<div class="pro-pric" style="margin-top: 5px;"><span style="font-size: 12px;">价&nbsp;&nbsp;&nbsp;格:</span><b style="font-size:12px;font-weight:normal;">￥'+goodsitem['price']+'</b></div>';
+	        					
+	        					datahtml+='<div class="pro-pric" style="margin-top: 0px;"><span style="font-size: 12px;">规&nbsp;&nbsp;&nbsp;格:</span><b style="font-size:12px;font-weight:normal;">'+goodsitem['sku_name']+'</b></div>';
+	        					datahtml+='<div class="pro-pric" style="margin-top: 5px;"><span style="font-size: 12px;">数量:</span><b style="font-size:12px;font-weight:normal;">'+goodsitem['num']+'件</b></div>';
+	        					datahtml+='</div></a>';
+	        					datahtml+='<div class="div-return">';
+	        					if(ordersitem['payment_type']==4){
+	        						if(ordersitem['is_refund']==1 && goodsitem['refund_status']==0 && ordersitem['order_status']==2){
+		        						datahtml+='<input type="button" onclick="window.location.href=\''+__URL('APP_MAIN/Order/refundDetail?order_goods_id='+goodsitem['order_goods_id'])+'\'" style="-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;border-radius:3px;border:1px solid red;color:#F37872;background-color:white;font-size: 12px;padding:5px 10px 5px 10px;" value="退款/退货" />';
+	        						}
+	        					}else{
+	        						if(ordersitem['is_refund']==1 && goodsitem['refund_status']==0){
+		        						datahtml+='<input type="button" onclick="window.location.href=\''+__URL('APP_MAIN/Order/refundDetail?order_goods_id='+goodsitem['order_goods_id'])+'\'" style="-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;border-radius:3px;border:1px solid red;color:#F37872;background-color:white;font-size: 12px;padding:5px 10px 5px 10px;" value="退款/退货" />';
+		        					}
+	        					}
+	        					
+	        					if(goodsitem['refund_status']!=0){
+	        						datahtml+='<input type="button" onclick="window.location.href=\''+__URL('APP_MAIN/Order/refundDetail?order_goods_id='+goodsitem['order_goods_id'])+'\'" style="-webkit-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;border-radius:3px;border:1px solid red;color:#F37872;background-color:white;font-size: 12px;padding:5px 10px 5px 10px;" value="'+goodsitem['status_name']+'" />';
+	        					}
+	        					
+	        					datahtml+='</div>';
+	        					if(goodsitem['shipping_status']!=0){
+	        						datahtml+='<div style="width:100%;height:20px;color:#999999;margin-top: 5px;font-size: 12px;border-top: 1px dotted #ccc;padding-top:5px">';
+	        						datahtml+='<div style="width:20%;float:left;">已发货</div></div>';
+	        					}
+	        					datahtml+='</li>';
+	        				}
+							datahtml+='</ul>';
+							datahtml+='<div class="totle">';
+							datahtml+='<span class="status">'+ordersitem['status_name']+'</span>';
+							datahtml+='<span class="price">￥'+ordersitem['order_money']+'</span>';
+							datahtml+='<span class="pric-lable">总价</span>';
+							datahtml+='<span class="prc-num"></span></div>';
+							datahtml+='<div class="div-button">';
+							if(ordersitem['member_operation']!=''){
+								for(var x=0;x<ordersitem['member_operation'].length;x++){
+									operationitem=ordersitem['member_operation'][x];
+									datahtml+='<a href="javascript:void(0)" class="button [radius round] red" style="background-color: '+operationitem['color']+';border: 1px solid '+operationitem['color']+';" onclick="operation(\''+operationitem['no']+'\','+ordersitem['order_id']+')">'+operationitem['name']+'</a>';
+								}
+							}
+							datahtml+='</div></div>';
+	        			}
+        			}
+        			$('#list_content').html(datahtml);
+        			hiddenLoadMaskLayer();
+        		}
+        	});
+        }
+        //app端返回值
+        $("#backoutapp").click(function (){
+            var json ={
+            		"center" : "1",
+                }
+            window.webkit.messageHandlers.center.postMessage(json);
+        })
+    </script>
+{/block}
+{block name="bottom"}{/block}

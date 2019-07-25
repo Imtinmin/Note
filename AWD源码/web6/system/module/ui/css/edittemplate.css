@@ -1,0 +1,7 @@
+a.btn-file{margin:2px; display:inline-block;}
+a.btn-file.active{font-weight:bold;}
+.folder-menu .panel-heading .icon{color:#145ccd; font-weight:normal;}
+.folder-menu .panel-heading{cursor:pointer;}
+.folder-menu .panel-heading > .panel-actions{padding-top:6px; padding-right:6px;}
+
+.editor-wrapper pre {border: none}

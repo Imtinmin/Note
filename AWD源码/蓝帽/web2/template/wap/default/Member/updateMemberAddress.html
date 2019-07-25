@@ -1,0 +1,59 @@
+{extend name="wap/default/base" /} {block name="resources"}
+<link rel="stylesheet" type="text/css"
+	href="__TEMP__/{$style}/public/css/member_address.css">
+{/block} {block name="goodsHead"}
+<section class="head">
+	<a class="head_back" onclick="window.history.go(-1)"
+		href="javascript:void(0)"><i class="icon-back"></i></a>
+	<div class="head-title">我的收货地址</div>
+</section>
+{/block} 
+{block name="main"}
+<input type="hidden" id="ref_url" value="{$pre_url}">
+<input type="hidden" id="hidden_flag" value="{$flag}" />
+<input type="hidden" id="adressid" value="{$address_info['id']}">
+<input type="hidden" id="hidUrl" value="">
+<input type="hidden" id="provinceid" value="{$address_info['province']}">
+<input type="hidden" id="cityid" value="{$address_info['city']}">
+<input type="hidden" id="districtid" value="{$address_info['district']}">
+<input type="hidden" value="-1" id="AddressID">
+<form class="form-info">
+	<div class="div-item">
+		<span>姓名</span> <input type="text" placeholder="请输入收件人姓名" id="Name"
+			value="{$address_info['consigner']}" />
+	</div>
+
+	<div class="div-item">
+		<span>手机</span> <input type="text" placeholder="请输入手机号" id="Moblie"
+			value="{$address_info['mobile']}" />
+	</div>
+
+	<div class="div-item">
+		<span>省份</span> <select id="seleAreaNext" onchange="GetProvince();">
+			<option value="">选择省</option>
+		</select>
+	</div>
+
+	<div class="div-item">
+		<span>城市</span> <select id="seleAreaThird" onchange="getSelCity();">
+			<option value="">选择市</option>
+		</select>
+	</div>
+
+	<div class="div-item">
+		<span>区县</span> <select id="seleAreaFouth">
+			<option value="-1">选择区/县</option>
+		</select>
+	</div>
+
+	<div class="div-item">
+		<span>详细地址</span> <input type="text" placeholder="请输入详细地址"
+			id="AddressInfo" value="{$address_info['address']}" />
+	</div>
+</form>
+<button onclick="saveAddress()" class="btn-save">保存</button>
+{/block}
+{block name="bottom"}{/block}
+{block name="javascript"}
+<script src="__TEMP__/{$style}/public/js/address.js"></script>
+{/block}

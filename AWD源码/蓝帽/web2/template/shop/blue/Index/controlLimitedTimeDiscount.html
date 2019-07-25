@@ -1,0 +1,71 @@
+<!--
+	创建人：王永杰
+	创建时间：2017年2月7日 11:59:16
+	功能描述：限时折扣
+-->
+{if condition="count($discount_list) >0"}
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/ns_style.css">
+<!-- <div class="floor"></div> -->
+<div class="channel-content" ectype="channel">
+	<div class="seckill-channel" id="h-seckill">
+		<div class="box-hd clearfix">
+			<i class="box-hd-icon"></i>
+			<div class="sk-more">
+				<a href="{:__URL('SHOP_MAIN/index/discount')}" target="_blank">更多秒杀</a>
+			</div>
+		</div>
+		<hr style="border:0;border-bottom:1px solid #F3F3F3;" />
+		
+		<article class="main" id="discount">
+			<ul>
+				{volist name="discount_list" id="vo"}
+				<li onclick="location.href='{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$vo['goods_id'])}';">
+					<h4>{$vo.goods_name}</h4>
+					<strong class="promotion">￥{$vo.promotion_price}</strong>
+					<strong class="del">￥{$vo.price}</strong>
+					<img src="__UPLOAD__/{$vo['picture']['pic_cover_mid']}" />
+					<span class="settime" starttime="{$vo.start_time | getTimeStampTurnTime}" endtime="{$vo.end_time | getTimeStampTurnTime}"></span>
+				</li>
+				{/volist}
+			</ul>
+<!-- 			<a href="javascript:void(0);" class="prev"> -->
+<!-- 				<i class="icon-limit i-limited-arrow-left"></i> -->
+<!-- 			</a> -->
+<!-- 			<a href="javascript:void(0);" class="next"> -->
+<!-- 				<i class="icon-limit i-limited-arrow-right"></i> -->
+<!-- 			</a> -->
+		</article>
+	</div>
+</div>
+<script >
+$(function() {
+	updateEndTime();
+});
+
+//倒计时函数
+function updateEndTime() {
+	var date = new Date();
+	var time = date.getTime(); //当前时间距1970年1月1日之间的毫秒数
+	$(".settime").each(function(i) {
+		var endDate = this.getAttribute("endTime"); //结束时间字符串
+		//转换为时间日期类型
+		var endDate1 = eval('new Date(' + endDate.replace(/\d+(?=-[^-]+$)/, function(a) {
+			return parseInt(a, 10) - 1;
+		}).match(/\d+/g) + ')');
+
+		var endTime = endDate1.getTime(); //结束时间毫秒数
+		var lag = (endTime - time) / 1000; //当前时间和结束时间之间的秒数
+		if (lag > 0) {
+			var second = Math.floor(lag % 60);
+			var minite = Math.floor((lag / 60) % 60);
+			var hour = Math.floor((lag / 3600) % 24);
+			var day = Math.floor((lag / 3600) / 24);
+			$(this).html("还剩：<strong>" + day + "</strong>天<strong>" + hour + "</strong>时<strong>" + minite + "</strong>分<strong>" + second + "</strong>秒");
+		} else{
+			$(this).html("活动已经结束啦！");
+		}
+	});
+	setTimeout("updateEndTime()", 1000);
+}
+</script>
+{/if}

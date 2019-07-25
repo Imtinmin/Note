@@ -1,0 +1,232 @@
+{extend name="shop/default/Member/base" /}
+{block name="resources"}
+<!-- 添加css、字体文件文件 -->
+{/block}
+{block name="main"}
+
+<div class="user-right"> 
+	<div class="account">
+	
+		<div class="notice">
+			<i></i>
+			<span>用户中心公告：</span>
+			<marquee direction="left" align="left" behavior="scroll" scrollamount="1" scrolldelay="0" loop="-1">{$user_notice}</marquee>
+		</div>
+		
+		<div class="money">
+			<ul class="clearfix">
+				
+				<li class="first">
+					<div class="title"><span>余额</span></div>
+					<div class="pic">
+						<a href="{:__URL('SHOP_MAIN/member/balancelist')}"><i class="user_bg"></i></a>
+					</div>
+					<p><a href="{:__URL('SHOP_MAIN/member/balancelist')}">{$balance}</a></p>
+				</li>
+				
+				<li class="third">
+					<div class="title"><span>积分</span></div>
+					<div class="pic">
+						<a href="{:__URL('SHOP_MAIN/member/integrallist')}"><i class="user_bg"></i></a>
+					</div>
+					<p><a href="{:__URL('SHOP_MAIN/member/integrallist')}">{$point}积分</a></p>
+				</li>
+				
+				<li class="second">
+					<div class="title"><span>优惠劵</span></div>
+					<div class="pic">
+						<a href="{:__URL('SHOP_MAIN/member/vouchers')}"><i class="user_bg"></i></a>
+					</div>
+					<p><a href="{:__URL('SHOP_MAIN/member/vouchers')}">{$vouchersCount} 张</a></p>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="security">
+			{if condition="$member_info['user_info']['user_tel'] neq '' and $member_info['user_info']['user_email'] neq ''"}
+			
+			<div class="improve">
+				<p>安全等级</p>
+				<span class="improve-name">安全</span>
+				<i class="hign"><em></em></i>
+				<a href="{:__URL('SHOP_MAIN/member/usersecurity')}" title="提升账户安全等级">提升 &gt;</a>
+			</div>
+			
+			{elseif condition="$member_info['user_info']['user_tel'] neq '' OR $member_info['user_info']['user_email'] neq ''"/}
+			
+			<div class="improve">
+				<p>安全等级</p>
+				<span class="improve-name">良好</span>
+				<i class="middle"><em></em></i> 
+				<a href="{:__URL('SHOP_MAIN/member/usersecurity')}" title="提升账户安全等级">提升 &gt;</a>
+			</div>
+			
+			{else /}
+			
+			<div class="improve">
+				<p>安全等级</p>
+				<span class="improve-name">一般 </span>
+				<i class="low"><em></em></i> 
+				<a href="{:__URL('SHOP_MAIN/member/usersecurity')}" title="提升账户安全等级">提升 &gt;</a>
+			</div>
+			
+			{/if}
+			
+			<div class="safe-info clearfix">
+				<div class="safe-type phone">
+					<i class="tit-icon"></i>
+					<span class="safe-name">手机：
+					{if condition="$member_info['user_info']['user_tel'] neq ''"}
+						{$member_info['user_info']['user_tel']}</span>
+						<a class="res jc" href="{:__URL('SHOP_MAIN/member/usersecurity','atc=user_mobile')}">解除绑定</a>
+					{else /}
+					</span>
+						<a class="res" href="{:__URL('SHOP_MAIN/member/usersecurity','atc=user_mobile')}">未绑定</a>
+					{/if}
+				</div>
+				
+				<div class="safe-type mail">
+					<i class="tit-icon"></i>
+					<span class="safe-name">邮箱：
+					{if condition="$member_info['user_info']['user_email'] neq ''"}
+					{$member_info['user_info']['user_email']}</span>
+					<a class="res jc" href="{:__URL('SHOP_MAIN/member/usersecurity','atc=user_email')}">解除绑定</a>
+					{else /}
+					</span><a class="res" href="{:__URL('SHOP_MAIN/member/usersecurity','atc=user_email')}">未绑定</a>
+					{/if}
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="middle order">
+			<div class="line1 clearfix">
+				<div class="title"><i></i><span>交易提醒</span></div>
+				<div class="status">
+					<ul>
+						<li>
+							<a href="{:__URL('SHOP_MAIN/member/orderlist','status=0')}" title="待付款订单">待付款<span>{$wait_pay_num}</span></a>
+							<i></i>
+						</li>
+						<li>
+							<a href="{:__URL('SHOP_MAIN/member/orderlist','status=5')}" title="待评价商品">待评价<span>{$wait_evaluate}</span></a>
+						</li>
+					</ul>
+				</div>
+				<a class="more" href="{:__URL('SHOP_MAIN/member/orderlist')}" title="查看全部订单">查看全部订单 &gt;</a>
+			</div>
+			
+			{if condition="count($orderList) neq 0"}
+			<div class="proListUc">
+				{foreach $orderList as $order}
+				<ul class="listLine clearfix">
+					<li>
+						<ul class="img clearfix">
+							<li>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$order['order_item_list'][0]['goods_id'])}" title="{$order.order_item_list.0.goods_name}" target="_blank">
+									<img src="__UPLOAD__/{$order.order_item_list.0.picture.pic_cover_small}" alt="{$order.order_item_list.0.goods_name}" /> 
+								</a>
+								<span class="order-num">{$order.order_item_list|count}</span>
+							</li>
+						</ul>
+					</li>
+					<li class="name">
+						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$order['order_item_list'][0]['goods_id'])}" title="{$order.order_item_list.0.goods_name}" target="_blank">{$order.order_item_list.0.goods_name}</a>
+					</li>
+					<li class="attr"></li>
+					<li class="type">
+						<a class="cancel-order" href="javascript:;" onclick="cancle_order({$order.order_id})">取消订单</a>
+					</li>
+					<li class="check">
+						<a href="{:__URL('SHOP_MAIN/member/orderdetail','orderid='.$order['order_id'])}" title="查看订单" target="_blank">查看</a>
+					</li>
+				</ul>
+				{/foreach}
+			</div>
+			{else/}
+			<div class="emptyFrame clearfix"><i class="user_bg"></i><span>您好久没在商城购物了，这里空空的，赶快去购物吧！</span></div>
+			{/if}
+		</div>
+		
+		<div class="middle cart">
+			<div class="line1 clearfix">
+				<div class="title"><i></i><span>我的购物车</span></div>
+			</div>
+			{if condition="count($cart_list) neq 0"}
+			<div class="proListUc_cart">
+				<div class="div_scroll">
+					<div style="float:left; height:auto; width:auto">
+						<ul class="listLine_cart clearfix">
+						{foreach name="cart_list" item = "cart"}
+							<li>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$cart['goods_id'])}" target="_blank" title="{$cart.goods_name}" class="pic">
+									<img src="__UPLOAD__/{$cart['picture_info']['pic_cover_small']}" alt="{$cart.goods_name}" />
+								</a>
+								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$cart['goods_id'])}" target="_blank" title="{$cart.goods_name}" class="name">{$cart.goods_name}</a>
+								<p>售价：<font>￥{$cart.price}</font></p>
+							</li>
+						{/foreach}
+						</ul>
+					</div>
+				</div>
+				<p class="more"><a href="{:__URL('SHOP_MAIN/goods/cart')}" target="_blank" title="查看购物车所有商品">查看购物车所有商品 &gt;</a></p>
+			</div>
+			{else/}
+			<div class="emptyFrame_cart"><i class="user_bg"></i><span>您的购物车里空空的，赶快去购物吧！</span></div>
+			{/if}
+		</div>
+
+		<div class="middle collect">
+			<div class="line1" id="tab1">
+				<div class="title"><i></i><span>商品收藏</span></div>
+			</div>
+			<div style="height:0px;line-height:0px;clear:both"></div>
+			<div class="tab_con" style="width:100%">
+				<div id="con_tab_1">
+					{if condition="$goods_collection_list_count>0"}
+					<div class="colList clearfix">
+						<div class="colFrame">
+							<ul style="left: 0px;" class="clearfix">
+							{foreach name="goods_collection_list" item="goods" key="k"}
+								<li class="first">
+									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank" class="img">
+										<img src="__UPLOAD__/{$goods.pic_cover_mid}" alt="{$goods.goods_name}" />
+										<span>￥{$goods.promotion_price}</span>
+									</a>
+									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank" class="name">{$goods.goods_name}</a>
+								</li>
+							{/foreach}
+							</ul>
+						</div>
+						<p class="more"><a href="{:__URL('SHOP_MAIN/member/goodscollectionlist')}" title="查看收藏的所有商品">查看收藏的所有商品 &gt;</a></p>
+					</div>
+					{else/}
+					<div class="emptyFrame_collect"> <i class="user_bg"></i><span>您的收藏空空的，赶快去购物吧！</span></div> 
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="javascript"}
+<script type="text/javascript">
+function cancle_order(order_id){
+	$.ajax({
+		url:"{:__URL('SHOP_MAIN/member/orderclose')}",
+		type:'post',
+		data:{'order_id':order_id},
+		dataType:"json",
+		success:function(res){
+			// alert(JSON.stringify(res));
+			if(res['code']>0){
+				$.msg("取消订单成功");
+				location.href=__URL("SHOP_MAIN/member/index");
+			}else{
+				$.msg(res['message']);
+			}
+		}
+	})
+}
+</script>
+{/block}

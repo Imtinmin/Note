@@ -1,0 +1,60 @@
+<div class="user-left"> <div class="sideNav">
+  <h1><a href="{:__URL('SHOP_MAIN/member/index')}"><span>我的商城</span></a></h1>
+  <div class="userInfo">
+    <div class="myInfo clearfix"> 
+      <div class="photo">
+        <div class="mask">
+        {if condition="$member_img neq '' and $member_img neq '0'"}
+        	<img id="headImagePath" src="__UPLOAD__/{$member_img}" style="height:65px; width:65px;">
+        {else/}
+        	<img id="headImagePath" src="__TEMP__/{$style}/public/images/temp_default_user_portrait_0.png" style="width:80px;">
+        {/if}
+      </div> 
+      </div>
+      <div class="info-op">
+      	<ul>
+      		<li class="info-op1"><span style="color: #fff;padding-left: 20px;">{$member_detail.level_name}</span></li> 
+        	<li class="info-op1"><i></i><a href="{:__URL('SHOP_MAIN/member/person')}">修改资料</a></li>
+        	<li class="info-op2"><i></i><a href="javascript:logout();" target="_top">安全退出</a></li>
+        </ul>
+      </div>
+    </div>
+    <a class="name" href="{:__URL('SHOP_MAIN/member/person')}">{$member_info['user_info']['nick_name']}</a>
+  </div>
+</div>
+ <div class="navList">
+      <div class="func func1 clearfix">
+        <p class="title"><i></i><span>会员中心</span></p>
+        <a href="{:__URL('SHOP_MAIN/member/index')}"  class="item"><span>欢迎页</span><i></i></a> 
+        <a href="{:__URL('SHOP_MAIN/member/person')}"  class="item "><span>个人资料</span><i></i></a>
+        <a href="{:__URL('SHOP_MAIN/member/usersecurity')}"  class="item "><span>账户安全</span><i></i></a>
+        <a href="{:__URL('SHOP_MAIN/member/addresslist')}" class="item "><span>收货地址</span><i></i></a>
+        <!-- 目前只有平台余额，直接进入详情 -->
+        <a href="{:__URL('SHOP_MAIN/member/balancelist')}" class="item " id="qiye_balance"><span>账户余额</span><i></i></a>
+        <a href="{:__URL('SHOP_MAIN/member/balancewithdrawlist')}" class="item " id="qiye_balance_Withdrawals"><span>提现记录</span><i></i></a>
+        <!-- <a href="SHOP_MAIN/member/balanceWithdrawals" class="item " id="qiye_balance_Withdrawals"><span>余额提现</span><i></i></a> -->
+        <a href="{:__URL('SHOP_MAIN/member/vouchers')}"  class="item "><span>我的优惠券</span><i></i></a>
+        <a href="{:__URL('SHOP_MAIN/member/integrallist')}"  class="item " id="qiye_point"><span>我的积分</span><i></i></a>
+      </div>
+      <div class="func func2 clearfix">
+        <p class="title"><i></i><span>交易中心</span></p>
+        <a href="{:__URL('SHOP_MAIN/member/orderlist')}"  class="item "><span>我的订单</span><i></i></a> 
+        <a href="{:__URL('SHOP_MAIN/member/backlist')}"   class="item "><span>退款/退货及维修</span><i></i></a> 
+        <a href="{:__URL('SHOP_MAIN/member/goodsevaluationlist')}"   class="item "><span>商品评价/晒单</span><i></i></a> 
+        <a href="{:__URL('SHOP_MAIN/member/goodscollectionlist')}" class="item "><span>商品收藏</span><i></i></a> 
+      </div>
+</div> </div>
+<script type="text/javascript">
+	$(function(){
+		//选中
+		$('.navList>a').removeClass('curs');
+		var path_info='{$path_info}';
+// 		alert(path_info);
+// 		alert();
+		if(path_info==''||path_info=="member"){
+			$("[href^='{:__URL('SHOP_MAIN/member/index')}']").addClass('curs');
+		}else{
+			$("[href^='{:__URL('SHOP_MAIN/'.$path_info)}']").addClass('curs');	
+		}
+	})
+</script>

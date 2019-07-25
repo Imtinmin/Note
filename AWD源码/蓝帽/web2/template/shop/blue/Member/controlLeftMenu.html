@@ -1,0 +1,103 @@
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/user.css" />
+<div class="breadcrumb">
+	<a href="{:__URL('SHOP_MAIN')}" class="index">首页</a>
+	<span class="crumbs-arrow">&gt;</span>
+	<a href="{:__URL('SHOP_MAIN/member/index')}" class="js-bread-crumb"></a>
+</div>
+<div class="member-menu">
+	<div class="user-info">
+		<header>
+			<span class="level-name">{$member_detail.level_name}</span>
+			<span class="exit" onclick="logout()" title="退出登录"><i class="icon i-exit"></i>退出</span>
+		</header>
+		<div class="logo" onclick="location.href='{__URL('SHOP_MAIN/member/person')}';" title="查看个人资料">
+			{if condition="$member_img neq '' and $member_img neq '0'"}
+			<img id="headImagePath" src="__UPLOAD__/{$member_img}" />
+			{else/}
+			<img id="headImagePath" src="__TEMP__/{$style}/public/images/temp_default_user_portrait_0.png" />
+			{/if}
+		</div>
+		<strong onclick="location.href='{:__URL('SHOP_MAIN/member/person')}';" title="查看个人资料">{$member_info['user_info']['nick_name']}</strong>
+	</div>
+	<article class="list">
+		<div class="item">
+			<h3>
+				<i class="icon i-member-center"></i>
+				<span>会员中心</span>
+			</h3>
+			<ul>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/index')}';" data-href="{:__URL('SHOP_MAIN/member/index')}">
+					<span>欢迎页</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/person')}';" data-href="{:__URL('SHOP_MAIN/member/person')}">
+					<span>个人资料</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/usersecurity')}';" data-href="{:__URL('SHOP_MAIN/member/usersecurity')}">
+					<span>账户安全</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/addresslist')}';" data-href="{:__URL('SHOP_MAIN/member/addresslist')}">
+					<span>收货地址</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/balancelist')}';" data-href="{:__URL('SHOP_MAIN/member/balancelist')}">
+					<span>账户余额</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/balancewithdrawlist')}';" data-href="{:__URL('SHOP_MAIN/member/balancewithdrawlist')}">
+					<span>提现记录</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/vouchers')}';" data-href="{:__URL('SHOP_MAIN/member/vouchers')}">
+					<span>我的优惠券</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/integrallist')}';" data-href="{:__URL('SHOP_MAIN/member/integrallist')}">
+					<span>我的积分</span>
+					<i class="icon i-arrow"></i>
+				</li>
+			</ul>
+		</div>
+		<div class="item">
+			<h3>
+				<i class="icon i-trading-center"></i>
+				<span>交易中心</span>
+			</h3>
+			<ul>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist')}';" data-href="{:__URL('SHOP_MAIN/member/orderlist')}">
+					<span>我的订单</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/backlist')}';" data-href="{:__URL('SHOP_MAIN/member/backlist')}">
+					<span>退款/退货及维修</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/goodsevaluationlist')}';" data-href="{:__URL('SHOP_MAIN/member/goodsevaluationlist')}">
+					<span>商品评价/晒单</span>
+					<i class="icon i-arrow"></i>
+				</li>
+				<li onclick="location.href='{:__URL('SHOP_MAIN/member/goodscollectionlist')}';" data-href="{:__URL('SHOP_MAIN/member/goodscollectionlist')}">
+					<span>商品收藏</span>
+					<i class="icon i-arrow"></i>
+				</li>
+			</ul>
+		</div>
+	</article>
+</div>
+<script type="text/javascript">
+$(function(){
+	//选中
+	var path_info='{$path_info}';
+	if(path_info==''||path_info=="member"){
+		$("li[data-href^='SHOP_MAIN/member/index']").addClass('current');
+		$(".js-bread-crumb").attr("href",$("li[data-href^='SHOP_MAIN/member/index']").attr("data-href"));
+		$(".js-bread-crumb").text($("li[data-href^='SHOP_MAIN/member/index']").text());
+	}else{
+		$("li[data-href^='SHOP_MAIN/{$path_info}']").addClass('current');
+		$(".js-bread-crumb").attr("href",$("li[data-href^='SHOP_MAIN/{$path_info}']").attr("data-href"));
+		$(".js-bread-crumb").text($("li[data-href^='SHOP_MAIN/{$path_info}']").text());
+	}
+});
+</script>

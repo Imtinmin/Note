@@ -1,0 +1,26 @@
+{extend name="shop/blue/base" /}
+{block name="main"}
+<div class="margin-w1210">
+	{include file='shop/blue/Member/controlLeftMenu'/}
+	<div class="member-main">
+		<div class="box">
+			<div class="tabmenu">
+				<ul class="tab">
+					<li class="active">兑换积分</li>
+				</ul>
+			</div>
+			<input type="hidden" value="{$shop_id}" id="getshopid"/>
+			<span style="font-size:24px; display:block; text-align:center; width:100%;color:#0689e1;margin-top:100px;">兑换成功</span>
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	setTimeout(function(){
+		// var shopid = $("#getshopid").attr("value");
+		// window.location = "SHOP_MAIN/member/integralwater?shop_id="+shopid;
+		window.location = __URL("SHOP_MAIN/member/integrallist");
+	},1000);
+});
+</script>
+{/block}
