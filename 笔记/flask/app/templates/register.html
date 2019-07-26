@@ -1,0 +1,44 @@
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="eight wide column">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="ui success message">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+
+    {% elif error %}
+    <div class="ui error message">
+      <p>{{ error }}</p>
+    </div>
+  {% endif %}
+  {% endwith %}
+
+</div>
+<div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+      <form class="ui form segment" method="post" enctype="multipart/form-data">
+        <div class="field required">
+          <label>Username</label>
+          {{ form.username }}
+        </div>
+        <div class="field required">
+          <label>Password</label>
+          {{ form.password }}
+        </div>
+        <div class="field required">
+          <label>Confirm</label>
+          {{ form.confirm }}
+        </div>
+        <div class="field required">
+          <label>Email</label>
+          {{ form.email }}
+        </div>
+        {{ form.submit(class='ui button fluid') }}
+        <!-- <input type="submit" class="ui button fluid" value="注册"> -->
+      </form>
+    </div>
+  </div>  

