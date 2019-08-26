@@ -1,0 +1,23 @@
+{
+  "name": "uploadpj",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "author": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "element-ui": "^2.11.1",
+    "vue": "^2.6.10",
+    "vue-cli": "^2.9.6",
+    "vue-router": "^3.1.2",
+    "vuex": "^3.1.1"
+  }
+}
