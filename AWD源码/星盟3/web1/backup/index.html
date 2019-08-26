@@ -1,0 +1,72 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+ 
+        <title>登陆 - 博客</title>
+    </head>
+    <body class='bg-info'>
+  
+                    <div class='panel-heading'><h4>登陆 - 博客</h4></div>
+                    <div class='panel-body'>
+                        <form method="post" id='form-login' class='form-horizontal' action="checklogin.php">
+                            <div class='form-group col-xs-12'>
+                                <label for="name" class='col-sm-2 control-label text-center'>User：</label>
+                                <div class='col-sm-8'>
+                                    <input id='name' name='username' class='form-control' type='input' placeholder="用户名">
+
+                                <label for="name" class='col-sm-2 control-label text-center'>Pass：</label>
+                                <div class='col-sm-8'>   
+                                    <input name='password' class='form-control' type='password' placeholder="密码">
+                                </div>
+                            </div>
+                        </form>
+
+                                <button id='login' class='btn btn-primary'>登陆</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="/style/jquery/jquery.min.js"></script>
+        <script src="/style/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            $(function(){
+                var $login = $("#login");
+                $login.on(
+                    "click",function(){
+                        try{
+                            $.ajax({
+                                url: '/admin/checklogin.php',
+                                type: 'POST',
+                                dataType:'json',
+                                cache: false,
+                                data: new FormData($('#form-login')[0]),
+                                processData: false,
+                                contentType: false
+                                }).done(function(res){
+                                    if(data.result=='true'){
+                                        alert('登陆成功');
+                                    }else{
+                                        alert('登陆失败');
+                                    }
+                                }).fail(function(res){
+                                    alert('登陆失败');
+                                });
+                        }catch(e){
+                            alert(e);
+                        }
+                    }
+                );
+            });
+        </script>
+    </body>
+</html>
